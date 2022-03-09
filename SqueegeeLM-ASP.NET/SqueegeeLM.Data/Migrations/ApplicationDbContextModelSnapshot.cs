@@ -222,13 +222,15 @@ namespace SqueegeeLM.Web.Data.Migrations
 
             modelBuilder.Entity("SqueegeeLM.Data.Models.Appoitment", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<Guid>("AreaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -238,6 +240,8 @@ namespace SqueegeeLM.Web.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AreaId");
+
                     b.HasIndex("CustomerId");
 
                     b.ToTable("Appoitments");
@@ -245,9 +249,9 @@ namespace SqueegeeLM.Web.Data.Migrations
 
             modelBuilder.Entity("SqueegeeLM.Data.Models.Area", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PostCode")
                         .IsRequired()
@@ -261,37 +265,17 @@ namespace SqueegeeLM.Web.Data.Migrations
 
             modelBuilder.Entity("SqueegeeLM.Data.Models.Customer", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("AreaId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(36)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<int>("PhoneNumber")
-                        .HasMaxLength(20)
-                        .HasColumnType("int");
+                    b.Property<Guid>("AreaId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -300,19 +284,69 @@ namespace SqueegeeLM.Web.Data.Migrations
                     b.ToTable("Customers");
                 });
 
+            modelBuilder.Entity("SqueegeeLM.Data.Models.Frequency", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Frequencies");
+                });
+
+            modelBuilder.Entity("SqueegeeLM.Data.Models.Review", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<Guid>("CustomerId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Reviews");
+                });
+
             modelBuilder.Entity("SqueegeeLM.Data.Models.Service", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasMaxLength(36)
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AppoitmentId")
-                        .HasColumnType("nvarchar(36)");
+                    b.Property<Guid?>("AppoitmentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("CleaningType")
                         .HasColumnType("int");
 
+                    b.Property<int>("FrequencyId")
+                        .HasColumnType("int");
+
                     b.Property<decimal>("Price")
+                        .HasPrecision(18, 2)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("PropertyType")
@@ -321,6 +355,8 @@ namespace SqueegeeLM.Web.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppoitmentId");
+
+                    b.HasIndex("FrequencyId");
 
                     b.ToTable("Services");
                 });
@@ -378,11 +414,19 @@ namespace SqueegeeLM.Web.Data.Migrations
 
             modelBuilder.Entity("SqueegeeLM.Data.Models.Appoitment", b =>
                 {
-                    b.HasOne("SqueegeeLM.Data.Models.Customer", "Customer")
-                        .WithMany("CustomerAppoitments")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                    b.HasOne("SqueegeeLM.Data.Models.Area", "Area")
+                        .WithMany()
+                        .HasForeignKey("AreaId")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("SqueegeeLM.Data.Models.Customer", "Customer")
+                        .WithMany("Appoitments")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Area");
 
                     b.Navigation("Customer");
                 });
@@ -398,11 +442,30 @@ namespace SqueegeeLM.Web.Data.Migrations
                     b.Navigation("Area");
                 });
 
+            modelBuilder.Entity("SqueegeeLM.Data.Models.Review", b =>
+                {
+                    b.HasOne("SqueegeeLM.Data.Models.Customer", "Customer")
+                        .WithMany("Reviews")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
+                });
+
             modelBuilder.Entity("SqueegeeLM.Data.Models.Service", b =>
                 {
                     b.HasOne("SqueegeeLM.Data.Models.Appoitment", null)
                         .WithMany("Services")
                         .HasForeignKey("AppoitmentId");
+
+                    b.HasOne("SqueegeeLM.Data.Models.Frequency", "Frequency")
+                        .WithMany()
+                        .HasForeignKey("FrequencyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Frequency");
                 });
 
             modelBuilder.Entity("SqueegeeLM.Data.Models.Appoitment", b =>
@@ -417,7 +480,9 @@ namespace SqueegeeLM.Web.Data.Migrations
 
             modelBuilder.Entity("SqueegeeLM.Data.Models.Customer", b =>
                 {
-                    b.Navigation("CustomerAppoitments");
+                    b.Navigation("Appoitments");
+
+                    b.Navigation("Reviews");
                 });
 #pragma warning restore 612, 618
         }

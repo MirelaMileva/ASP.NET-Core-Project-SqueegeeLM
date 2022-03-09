@@ -1,28 +1,32 @@
 ﻿namespace SqueegeeLM.Data.Models
 {
-    using SqueegeeLM.Data.Models.Enum;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using Microsoft.EntityFrameworkCore;
 
-    using static DataConstants;
+    using SqueegeeLM.Data.Models.Enums;
 
     public class Service
     {
-        public Service()
-        {
-            this.Id = Guid.NewGuid().ToString();
-        }
-
         [Key]
-        [MaxLength(IdMaxLength)]
-        public string Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
 
+        [Required]
         public CleaningType CleaningType { get; set; }
 
+        [Required]
         public PropertyType PropertyType { get; set; }
+
+        [Required]
+        public int FrequencyId { get; set; }
+
+        [ForeignKey(nameof(FrequencyId))]
+        public Frequency Frequency { get; set; }
 
         [Required]
         [Range(0.01, 100.00)]
         [DataType(DataType.Currency)]
+        [Precision(18, 2)]
         public decimal Price { get; set; }
     }
 }

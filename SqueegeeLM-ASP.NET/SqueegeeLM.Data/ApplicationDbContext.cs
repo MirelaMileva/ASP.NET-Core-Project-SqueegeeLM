@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+
     using SqueegeeLM.Data.Models;
 
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
@@ -18,6 +19,10 @@
         public DbSet<Area> Areas { get; set; }
         public DbSet<Service> Services { get; set; }
 
+        public DbSet<Frequency> Frequencies { get; set; }
+
+        public DbSet<Review> Reviews { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
 
@@ -29,12 +34,6 @@
                 .HasOne(c => c.Area)
                 .WithMany(c => c.Customers)
                 .HasForeignKey(c => c.AreaId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<Appoitment>()
-                .HasOne(a => a.Customer)
-                .WithMany(a => a.CustomerAppoitments)
-                .HasForeignKey(a => a.CustomerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);

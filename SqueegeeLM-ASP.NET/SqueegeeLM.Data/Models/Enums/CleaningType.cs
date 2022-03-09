@@ -1,4 +1,4 @@
-﻿namespace SqueegeeLM.Data.Models.Enum
+﻿namespace SqueegeeLM.Data.Models.Enums
 {
     public enum CleaningType
     {
