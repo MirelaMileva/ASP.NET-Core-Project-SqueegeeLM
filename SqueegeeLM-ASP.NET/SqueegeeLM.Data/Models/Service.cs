@@ -2,9 +2,6 @@
 {
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
-    using Microsoft.EntityFrameworkCore;
-
-    using SqueegeeLM.Data.Models.Enums;
 
     public class Service
     {
@@ -12,21 +9,21 @@
         public Guid Id { get; set; } = Guid.NewGuid();
 
         [Required]
-        public CleaningType CleaningType { get; set; }
+        public int CleaningCategoryId { get; set; }
+
+        [ForeignKey(nameof(CleaningCategoryId))]
+        public CleaningCategory CleaningCategory { get; set; }
 
         [Required]
-        public PropertyType PropertyType { get; set; }
+        public int PropertyCategoryId { get; set; }
+
+        [ForeignKey(nameof(PropertyCategoryId))]
+        public PropertyCategory PropertyCategory { get; set; }
 
         [Required]
         public int FrequencyId { get; set; }
 
         [ForeignKey(nameof(FrequencyId))]
         public Frequency Frequency { get; set; }
-
-        [Required]
-        [Range(0.01, 100.00)]
-        [DataType(DataType.Currency)]
-        [Precision(18, 2)]
-        public decimal Price { get; set; }
     }
 }

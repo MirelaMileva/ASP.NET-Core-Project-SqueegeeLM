@@ -22,14 +22,11 @@
         public DbSet<Frequency> Frequencies { get; set; }
 
         public DbSet<Review> Reviews { get; set; }
+        public DbSet<CleaningCategory> CleaningCategories { get; set; }
+        public DbSet<PropertyCategory> PropertyCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
-            builder.Entity<Service>()
-                .Property(p => p.Price)
-                .HasColumnType("decimal(18,2)");
-
             builder.Entity<Customer>()
                 .HasOne(c => c.Area)
                 .WithMany(c => c.Customers)

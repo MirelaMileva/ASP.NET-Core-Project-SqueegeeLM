@@ -2,11 +2,8 @@
 {
     public enum CleaningType
     {
-        ExteriorWindowCleaning = 0,
-        InteriorWindowCleaning = 1,
-        ConservatoryCleaning = 2,
-        GutterCleaning = 3,
-        PatioDrivewayCleaning = 4,
-        CommercialWindowCleaning = 5,
+        Outside = 0,
+        Inside = 1,
+        OutsideAndInside = 2,
     }
 }

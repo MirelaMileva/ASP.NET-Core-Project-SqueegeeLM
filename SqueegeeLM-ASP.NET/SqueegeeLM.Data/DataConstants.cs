@@ -8,5 +8,7 @@
         public const int FrequencyNameMaxLength = 60;
         public const int ReviewNameMaxLength = 50;
         public const int ReviewDescriptionMaxLength = 500;
+        public const int CleaningNameMaxLength = 50;
+        public const int PropertyNameMaxLength = 50;
     }
 }
