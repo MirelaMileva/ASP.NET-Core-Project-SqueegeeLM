@@ -22,6 +22,6 @@
         [Required]
         public CleaningType CleaningType { get; set; }
 
-        public IEnumerable<Service> Services { get; set; }
+        public ICollection<Service> Services { get; set; }
     }
 }

@@ -5,8 +5,13 @@
 
     public class Service
     {
+        public Service()
+        {
+            this.Id = Guid.NewGuid();
+        }
+
         [Key]
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public Guid Id { get; set; }
 
         [Required]
         public int CleaningCategoryId { get; set; }

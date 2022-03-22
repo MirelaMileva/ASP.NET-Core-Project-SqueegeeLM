@@ -18,18 +18,12 @@
         public DateTime Date { get; set; }
 
         [Required]
-        public Guid CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
         [ForeignKey(nameof(CustomerId))]
         public Customer Customer { get; set; }
 
         public bool IsBooked { get; set; }
-
-        [Required]
-        public Guid AreaId { get; set; }
-
-        [ForeignKey(nameof(AreaId))]
-        public Area Area { get; set; }
 
         public ICollection<Service> Services { get; set; }
     }

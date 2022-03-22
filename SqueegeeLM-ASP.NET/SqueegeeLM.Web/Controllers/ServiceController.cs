@@ -7,9 +7,9 @@
 
     public class ServiceController : Controller
     {
-        private readonly ApplicationDbContext data;
+        private readonly SqueegeeLMDbContext data;
 
-        public ServiceController(ApplicationDbContext data) => this.data = data;
+        public ServiceController(SqueegeeLMDbContext data) => this.data = data;
 
         public IActionResult AddService() => View(new AddServiceViewModel
         {

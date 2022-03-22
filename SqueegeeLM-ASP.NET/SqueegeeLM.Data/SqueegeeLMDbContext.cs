@@ -6,24 +6,22 @@
 
     using SqueegeeLM.Data.Models;
 
-    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
+    public class SqueegeeLMDbContext : IdentityDbContext<IdentityUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public SqueegeeLMDbContext(DbContextOptions<SqueegeeLMDbContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<Appoitment> Appoitments { get; set; }
-
-        public DbSet<Area> Areas { get; set; }
-        public DbSet<Service> Services { get; set; }
-
-        public DbSet<Frequency> Frequencies { get; set; }
-
-        public DbSet<Review> Reviews { get; set; }
+        public DbSet<City> Cities { get; set; }
         public DbSet<CleaningCategory> CleaningCategories { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Frequency> Frequencies { get; set; }
         public DbSet<PropertyCategory> PropertyCategories { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Service> Services { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -36,7 +34,13 @@
             builder.Entity<Appoitment>()
                 .HasOne(a => a.Customer)
                 .WithMany(a => a.Appoitments)
-                .HasForeignKey(a => a.AreaId)
+                .HasForeignKey(a => a.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Address>()
+                .HasOne(a => a.Customer)
+                .WithMany(a => a.Addresses)
+                .HasForeignKey(a => a.CustomerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Review>()

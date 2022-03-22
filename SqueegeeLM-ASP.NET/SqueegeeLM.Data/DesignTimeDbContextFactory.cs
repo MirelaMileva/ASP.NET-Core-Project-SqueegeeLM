@@ -6,21 +6,21 @@
 
     using SqueegeeLM.Web.Data;
 
-    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
+    public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<SqueegeeLMDbContext>
     {
-        public ApplicationDbContext CreateDbContext(string[] args)
+        public SqueegeeLMDbContext CreateDbContext(string[] args)
         {
             var configuration = new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json")
                 .Build();
 
-            var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+            var optionsBuilder = new DbContextOptionsBuilder<SqueegeeLMDbContext>();
             
             optionsBuilder
                 .UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
 
-            return new ApplicationDbContext(optionsBuilder.Options);
+            return new SqueegeeLMDbContext(optionsBuilder.Options);
         }
     }
 }

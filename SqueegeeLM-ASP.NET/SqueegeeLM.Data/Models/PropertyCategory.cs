@@ -18,6 +18,6 @@
         [StringLength(PropertyNameMaxLength)]
         public string Name { get; set; }
 
-        public IEnumerable<Service> Services { get; set; }
+        public ICollection<Service> Services { get; set; }
     }
 }
