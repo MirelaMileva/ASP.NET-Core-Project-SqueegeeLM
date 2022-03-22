@@ -1,0 +1,40 @@
+﻿@model AddServiceViewModel
+
+@{
+    ViewData["Title"] = "Add Service";
+}
+
+<div class="row">
+    <h2 class="heading-margin text-center">Add Service</h2>
+
+    <form method="post">
+        <div class="form-group">
+            <label asp-for="CleaningCategoryId">Cleaning Category</label>
+            <select asp-for="CleaningCategoryId" class="form-control">
+                @foreach(var category in Model.CleaningCategories)
+                {
+                    <option value=@category.Id>@category.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="PropertyCategoryId">Property</label>
+            <select asp-for="PropertyCategoryId "class="form-control">
+                @foreach(var category in Model.PropertyCategories)
+                {
+                    <option value=@category.Id>@category.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label asp-for="FrequencyId">Frequency</label>
+            <select asp-for="FrequencyId "class="form-control">
+                @foreach(var category in Model.Frequency)
+                {
+                    <option value=@category.Id>@category.Name</option>
+                }
+            </select>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Submit" />
+    </form>
+</div>

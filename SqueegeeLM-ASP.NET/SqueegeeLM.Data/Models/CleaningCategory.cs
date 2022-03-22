@@ -7,6 +7,11 @@
 
     public class CleaningCategory
     {
+        public CleaningCategory()
+        {
+            this.Services = new List<Service>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -16,5 +21,7 @@
 
         [Required]
         public CleaningType CleaningType { get; set; }
+
+        public IEnumerable<Service> Services { get; set; }
     }
 }

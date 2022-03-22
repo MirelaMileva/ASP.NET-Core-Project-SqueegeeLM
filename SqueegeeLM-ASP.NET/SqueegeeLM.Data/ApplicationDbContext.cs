@@ -33,6 +33,36 @@
                 .HasForeignKey(c => c.AreaId)
                 .OnDelete(DeleteBehavior.Restrict);
 
+            builder.Entity<Appoitment>()
+                .HasOne(a => a.Customer)
+                .WithMany(a => a.Appoitments)
+                .HasForeignKey(a => a.AreaId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Review>()
+                .HasOne(r => r.Customer)
+                .WithMany(r => r.Reviews)
+                .HasForeignKey(r => r.CustomerId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Service>()
+                .HasOne(s => s.CleaningCategory)
+                .WithMany(s => s.Services)
+                .HasForeignKey(s => s.CleaningCategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Service>()
+                .HasOne(s => s.PropertyCategory)
+                .WithMany(s => s.Services)
+                .HasForeignKey(s => s.PropertyCategoryId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Service>()
+                .HasOne(s => s.Frequency)
+                .WithMany(s => s.Services)
+                .HasForeignKey(s => s.FrequencyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
             base.OnModelCreating(builder);
         }
     }

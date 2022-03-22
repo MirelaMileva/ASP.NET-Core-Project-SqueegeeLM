@@ -3,8 +3,14 @@
     using System.ComponentModel.DataAnnotations;
 
     using static DataConstants;
+
     public class PropertyCategory
     {
+        public PropertyCategory()
+        {
+            this.Services = new List<Service>();
+        }
+
         [Key]
         public int Id { get; set; }
 
@@ -13,6 +19,8 @@
         public string Name { get; set; }
 
         [Required]
-        public int BedroomCount { get; set; }
+        public int PropertyRooms { get; set; }
+
+        public IEnumerable<Service> Services { get; set; }
     }
 }

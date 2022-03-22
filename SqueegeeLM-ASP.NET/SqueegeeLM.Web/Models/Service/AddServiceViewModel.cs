@@ -1,10 +1,24 @@
 ﻿namespace SqueegeeLM.Web.Models.Service
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class AddServiceViewModel
     {
-        public int CleaningType { get; set; }
-        public int PropertyType { get; set; }
-        public int Frequency { get; set; }
-        public decimal Price { get; set; }
+        [Required]
+        [Display(Name = "Cleaning Category")]
+        public int CleaningCategoryId { get; set; }
+        public IEnumerable<CleaningCategoryViewModel> CleaningCategories { get; set; }
+
+        [Required]
+        [Display(Name = "Property")]
+        public int PropertyCategoryId { get; set; }
+
+        public IEnumerable<PropertyCategoryViewModel> PropertyCategories { get; set; }
+
+        [Required]
+        [Display(Name = "Frequency")]
+        public int FrequencyId { get; set; }
+
+        public IEnumerable<FrequencyServiceViewModel> Frequency { get; set; }
     }
 }
