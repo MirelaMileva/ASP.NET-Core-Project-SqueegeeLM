@@ -18,9 +18,6 @@
         [StringLength(PropertyNameMaxLength)]
         public string Name { get; set; }
 
-        [Required]
-        public int PropertyRooms { get; set; }
-
         public IEnumerable<Service> Services { get; set; }
     }
 }

@@ -28,9 +28,9 @@
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Customer>()
-                .HasOne(c => c.Area)
-                .WithMany(c => c.Customers)
-                .HasForeignKey(c => c.AreaId)
+                .HasOne<IdentityUser>()
+                .WithOne()
+                .HasForeignKey<Customer>(c => c.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Appoitment>()
