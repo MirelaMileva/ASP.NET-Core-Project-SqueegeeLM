@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SqueegeeLM.Data\SqueegeeLM.Data.csproj" />
+    <ProjectReference Include="..\SqueegeeLM.Services\SqueegeeLM.Services.csproj" />
   </ItemGroup>
 
 </Project>

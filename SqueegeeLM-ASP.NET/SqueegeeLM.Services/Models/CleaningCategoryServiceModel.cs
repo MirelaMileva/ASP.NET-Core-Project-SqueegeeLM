@@ -1,8 +1,6 @@
 ﻿namespace SqueegeeLM.Web.Models.Service
 {
-    using System.ComponentModel.DataAnnotations;
-
-    public class CleaningCategoryViewModel
+    public class CleaningCategoryServiceModel
     {
         public int Id { get; set; }
 
