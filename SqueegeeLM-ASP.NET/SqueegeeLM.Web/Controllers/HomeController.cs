@@ -5,7 +5,7 @@
 
     using SqueegeeLM.Web.Models;
 
-    public class HomeController : BaseController
+    public class HomeController : Controller
     {
         public IActionResult Index() => View();
 

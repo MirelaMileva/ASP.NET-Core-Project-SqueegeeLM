@@ -1,0 +1,19 @@
+﻿@model IEnumerable<ServiceListViewModel>
+
+<div class="row">
+    <div class="col-6">
+        @foreach(var service in Model)
+        {
+            <div class="card" style="width: 18rem;">
+            <div class="card-header">
+                Services
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">@service.CleaningCategories</li>
+                <li class="list-group-item">@service.PropertyCategoryId</li>
+                <li class="list-group-item">@service.FrequencyId</li>
+            </ul>
+        </div>
+        }
+    </div>
+</div>

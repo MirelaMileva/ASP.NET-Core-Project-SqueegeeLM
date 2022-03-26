@@ -2,12 +2,10 @@
 {
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-
-    using SqueegeeLM.Data.Models;
     using SqueegeeLM.Services.Contracts;
     using SqueegeeLM.Web.Models.Service;
 
-    public class ServiceController : Controller
+    public class ServiceController : BaseController
     {
         private readonly IServiceService service;
 
@@ -52,7 +50,7 @@
                 return View(model);
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AddAppoitment", "Appoitment");
         }
 
     }

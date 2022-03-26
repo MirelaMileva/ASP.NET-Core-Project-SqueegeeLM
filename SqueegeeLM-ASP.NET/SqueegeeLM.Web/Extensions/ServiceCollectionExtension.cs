@@ -9,7 +9,8 @@
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services)
         {
-            services.AddScoped<IServiceService, ServiceService>();
+            services.AddScoped<IServiceService, ServiceService>()
+                    .AddScoped<IAppoitmentService, AppoitmentService>();
 
             return services;
         }
