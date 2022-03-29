@@ -1,7 +1,6 @@
 ﻿namespace SqueegeeLM.Services
 {
     using SqueegeeLM.Data.Models;
-    using SqueegeeLM.Data.Models.Enums;
     using SqueegeeLM.Services.Contracts;
     using SqueegeeLM.Services.Models.Service;
     using SqueegeeLM.Web.Data;
@@ -24,6 +23,7 @@
                 CleaningCategoryId = model.CleaningCategoryId,
                 PropertyCategoryId = model.PropertyCategoryId,
                 FrequencyId = model.FrequencyId,
+                CleaningType = model.CleaningType
             };
 
             this.data.Services.Add(service);
@@ -37,8 +37,7 @@
                 .Select(c => new CleaningCategoryServiceModel
                 {
                     Id = c.Id,
-                    Name = c.Name,
-                    CleaningType = c.CleaningType
+                    Name = c.Name
                 })
                 .ToList();
         }

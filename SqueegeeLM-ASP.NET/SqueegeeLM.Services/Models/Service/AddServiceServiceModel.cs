@@ -6,6 +6,7 @@
     public class AddServiceServiceModel
     {
         public int CleaningCategoryId { get; set; }
+
         public IEnumerable<CleaningCategoryServiceModel> CleaningCategories { get; set; }
 
         public CleaningType CleaningType { get; set; }
