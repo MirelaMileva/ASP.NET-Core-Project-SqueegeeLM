@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SqueegeeLM.Web.Data;
 
@@ -11,9 +12,10 @@ using SqueegeeLM.Web.Data;
 namespace SqueegeeLM.Web.Data.Migrations
 {
     [DbContext(typeof(SqueegeeLMDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220329201241_AmendCleaningCategoryAndFrequencyTables")]
+    partial class AmendCleaningCategoryAndFrequencyTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -311,6 +313,9 @@ namespace SqueegeeLM.Web.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("CleaningType")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -425,9 +430,6 @@ namespace SqueegeeLM.Web.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("CleaningCategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CleaningType")
                         .HasColumnType("int");
 
                     b.Property<int>("FrequencyId")

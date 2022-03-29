@@ -14,6 +14,8 @@
         [Key]
         public int Id { get; set; }
 
+
+        [Required]
         [StringLength(FrequencyNameMaxLength)]
         public string Name { get; set; }
 

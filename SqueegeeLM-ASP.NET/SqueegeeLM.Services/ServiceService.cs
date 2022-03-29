@@ -1,8 +1,9 @@
 ﻿namespace SqueegeeLM.Services
 {
     using SqueegeeLM.Data.Models;
+    using SqueegeeLM.Data.Models.Enums;
     using SqueegeeLM.Services.Contracts;
-    using SqueegeeLM.Services.Models;
+    using SqueegeeLM.Services.Models.Service;
     using SqueegeeLM.Web.Data;
     using SqueegeeLM.Web.Models.Service;
     using System.Collections.Generic;
@@ -36,7 +37,8 @@
                 .Select(c => new CleaningCategoryServiceModel
                 {
                     Id = c.Id,
-                    Name = c.Name
+                    Name = c.Name,
+                    CleaningType = c.CleaningType
                 })
                 .ToList();
         }

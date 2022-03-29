@@ -1,5 +1,6 @@
 ﻿namespace SqueegeeLM.Web.Models.Service
 {
+    using SqueegeeLM.Data.Models.Enums;
     using System.ComponentModel.DataAnnotations;
 
     public class AddServiceViewModel
@@ -7,6 +8,9 @@
         [Display(Name = "Cleaning Category")]
         public int CleaningCategoryId { get; set; }
         public IEnumerable<CleaningCategoryServiceModel> CleaningCategories { get; set; }
+
+        [Display(Name = "Cleaning Type")]
+        public CleaningType CleaningType { get; set; }
 
         [Display(Name = "Property")]
         public int PropertyCategoryId { get; set; }

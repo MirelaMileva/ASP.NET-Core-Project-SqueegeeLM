@@ -1,5 +1,6 @@
 ﻿namespace SqueegeeLM.Data.Models
 {
+    using SqueegeeLM.Data.Models.Enums;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
@@ -30,5 +31,7 @@
 
         [ForeignKey(nameof(FrequencyId))]
         public Frequency Frequency { get; set; }
+
+        public CleaningType CleaningType { get; set; }
     }
 }

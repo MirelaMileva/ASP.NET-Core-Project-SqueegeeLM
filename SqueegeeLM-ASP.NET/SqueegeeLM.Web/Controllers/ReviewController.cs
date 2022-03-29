@@ -2,9 +2,9 @@
 {
     using Microsoft.AspNetCore.Mvc;
 
-    public class CustomerController : Controller
+    public class ReviewController : Controller
     {
-        public IActionResult Create()
+        public IActionResult Index()
         {
             return View();
         }

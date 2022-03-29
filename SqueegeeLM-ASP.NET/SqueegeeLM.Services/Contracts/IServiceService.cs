@@ -1,6 +1,6 @@
 ﻿namespace SqueegeeLM.Services.Contracts
 {
-    using SqueegeeLM.Services.Models;
+    using SqueegeeLM.Services.Models.Service;
     using SqueegeeLM.Web.Models.Service;
 
     public interface IServiceService

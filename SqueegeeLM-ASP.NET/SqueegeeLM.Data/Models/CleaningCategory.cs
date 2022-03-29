@@ -19,9 +19,6 @@
         [StringLength(CleaningNameMaxLength)]
         public string Name { get; set; }
 
-        [Required]
-        public CleaningType CleaningType { get; set; }
-
         public ICollection<Service> Services { get; set; }
     }
 }

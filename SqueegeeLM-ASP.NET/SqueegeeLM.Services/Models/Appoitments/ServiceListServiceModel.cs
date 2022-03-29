@@ -1,8 +1,9 @@
-﻿namespace SqueegeeLM.Web.Models.Appoitment
+﻿namespace SqueegeeLM.Services.Models.Appoitment
 {
+    using SqueegeeLM.Data.Models.Enums;
     using System.ComponentModel.DataAnnotations;
 
-    public class ServiceListViewModel
+    public class ServiceListServiceModel
     {
         [Display(Name = "Cleaning Category")]
         public int CleaningCategoryId { get; set; }
