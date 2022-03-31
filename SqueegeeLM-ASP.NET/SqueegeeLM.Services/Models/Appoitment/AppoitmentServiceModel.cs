@@ -10,6 +10,6 @@
 
         public bool IsBooked { get; set; }
 
-        public ICollection<ServiceListServiceModel> Services { get; set; }
+        public List<ServiceListServiceModel> Services { get; set; }
     }
 }

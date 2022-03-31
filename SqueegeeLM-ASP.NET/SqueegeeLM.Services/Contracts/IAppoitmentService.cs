@@ -7,6 +7,6 @@
     {
         void AddAppoitment(AppoitmentServiceModel model);
 
-        //ServiceListServiceModel GetAllServices();
+        List<ServiceListServiceModel> GetAllServices();
     }
 }

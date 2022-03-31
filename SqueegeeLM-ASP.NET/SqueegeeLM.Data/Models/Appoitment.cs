@@ -25,6 +25,6 @@
 
         public bool IsBooked { get; set; }
 
-        public ICollection<Service> Services { get; set; }
+        public IEnumerable<Service> Services { get; set; }
     }
 }

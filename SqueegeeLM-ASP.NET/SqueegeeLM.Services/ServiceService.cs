@@ -65,5 +65,10 @@
                })
                .ToList();
         }
+
+        //public bool UserIsCustomer()
+        //    => !this.data
+        //    .Customers
+        //    .Any(c => c.UserId == this.User.GetId());
     }
 }

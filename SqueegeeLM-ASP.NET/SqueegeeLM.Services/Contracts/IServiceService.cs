@@ -12,5 +12,7 @@
         IEnumerable<PropertyCategoryServiceModel> GetPropertyCategories();
 
         IEnumerable<FrequencyServiceModel> GetFrequencies();
+
+        //bool UserIsCustomer();
     }
 }

@@ -12,6 +12,6 @@
 
         public bool IsBooked { get; set; }
 
-        public ICollection<ServiceListViewModel> Services { get; set; }
+        public List<ServiceListViewModel> Services { get; set; }
     }
 }

@@ -1,6 +1,5 @@
 ﻿namespace SqueegeeLM.Web.Controllers
 {
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using SqueegeeLM.Services.Contracts;
     using SqueegeeLM.Web.Models.Service;
@@ -14,16 +13,22 @@
             this.service = service;
         }
 
-        [Authorize]
-        public IActionResult AddService() => View(new AddServiceViewModel
+        public IActionResult AddService()
         {
-            CleaningCategories = this.service.GetCleaningCategories(),
-            PropertyCategories = this.service.GetPropertyCategories(),
-            Frequency = this.service.GetFrequencies()
-        });
+            //if (!this.service.UserIsCustomer)
+            //{
+            //    return RedirectToAction("Create", "Customer");
+            //}
+
+            return View(new AddServiceViewModel
+               {
+                   CleaningCategories = this.service.GetCleaningCategories(),
+                   PropertyCategories = this.service.GetPropertyCategories(),
+                   Frequency = this.service.GetFrequencies()
+               });
+        }
 
         [HttpPost]
-        [Authorize]
         public IActionResult AddService(AddServiceViewModel model)
         {
             if (!this.service.GetCleaningCategories().Any(m => m.Id == model.CleaningCategoryId))

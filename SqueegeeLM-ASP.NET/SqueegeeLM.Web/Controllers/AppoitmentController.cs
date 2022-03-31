@@ -1,22 +1,29 @@
 ﻿namespace SqueegeeLM.Web.Controllers
 {
     using Microsoft.AspNetCore.Mvc;
+    using SqueegeeLM.Services.Contracts;
     using SqueegeeLM.Web.Models.Appoitment;
 
     public class AppoitmentController : BaseController
     {
-        public IActionResult AddAppoitment()
+        private readonly IAppoitmentService appoitmentService;
+
+        public AppoitmentController(IAppoitmentService appoitmentService)
         {
-            return View();
+            this.appoitmentService = appoitmentService;
         }
 
-        //[HttpPost]
-        //public IActionResult AddAppoitment(AppoitmentViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
+        public IActionResult Add() => View();
 
-        //    }
-        //}
+        [HttpPost]
+        public IActionResult Add(AppoitmentViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            return View(model);
+        }
     }
 }

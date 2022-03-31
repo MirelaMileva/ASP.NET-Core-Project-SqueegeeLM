@@ -11,6 +11,7 @@
         <div class="form-group">
             <label asp-for="CleaningCategoryId">Cleaning Category</label>
             <select asp-for="CleaningCategoryId" class="form-control">
+                <option value="">Options</option>
                 @foreach (var category in Model.CleaningCategories)
                 {
                     <option value=@category.Id>@category.Name</option>
@@ -19,13 +20,13 @@
         </div>
         <div class="form-group">
             <label asp-for="CleaningType">Cleaning Type</label>
-            <select asp-for="CleaningType" class="form-control" asp-items="Html.GetEnumSelectList<CleaningType>()">
-                <option>@Model.CleaningType</option>
+            <select asp-for="CleaningType" class="form-control" asp-items="Html.GetEnumSelectList<CleaningType>()">               
             </select>
         </div>
         <div class="form-group">
             <label asp-for="PropertyCategoryId">Property</label>
             <select asp-for="PropertyCategoryId " class="form-control">
+                <option value="">Options</option>
                 @foreach (var category in Model.PropertyCategories)
                 {
                     <option value=@category.Id>@category.Name</option>
@@ -35,6 +36,7 @@
         <div class="form-group">
             <label asp-for="FrequencyId">Frequency</label>
             <select asp-for="FrequencyId " class="form-control">
+                <option value="">Options</option>
                 @foreach (var category in Model.Frequency)
                 {
                     <option value=@category.Id>@category.Name</option>
