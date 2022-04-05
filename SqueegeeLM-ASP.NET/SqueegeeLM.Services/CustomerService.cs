@@ -3,7 +3,7 @@
     using SqueegeeLM.Data.Models;
     using SqueegeeLM.Services.Contracts;
     using SqueegeeLM.Web.Data;
-    using SqueegeeLM.Web.Models.Customer;
+    using System.Security.Claims;
 
     public class CustomerService : ICustomerService
     {
@@ -14,21 +14,34 @@
             this.data = data;
         }
 
-        public void BecomeCustomer(BecomeCustomerServiceModel model)
+        public int BecomeCustomer(string firstName, string lastName, string phoneNumber, string userId)
         {
-            var customer = new Customer
-            {
-                FirstName = model.FirstName,
-                LastName = model.LastName
-            };
+            //var userId = this.data.Users.Find(ClaimTypes.NameIdentifier).Id;
 
-            this.data.Customers.Add(customer);
+            var customerData = new Customer
+            {
+                FirstName = firstName,
+                LastName = lastName,
+                PhoneNumber = phoneNumber,
+                UserId = userId
+        };
+
+            this.data.Customers.Add(customerData);
             this.data.SaveChanges();
+
+            return customerData.Id;
         }
 
-        //public bool UserIsCustomer()
-        //    => !this.data
-        //    .Customers
-        //    .Any(c => c.UserId == this.User.GetId());
+        public bool UserIsCustomer(string userId)
+            => this.data
+                .Customers
+                .Any(c => c.UserId == userId);
+
+        public int GetCustomerId(string userId)
+            => this.data
+            .Customers
+            .Where(c => c.UserId == userId)
+            .Select(c => c.Id)
+            .FirstOrDefault();
     }
 }

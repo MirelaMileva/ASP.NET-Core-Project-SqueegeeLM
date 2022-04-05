@@ -5,6 +5,7 @@
         public const int CustomerAddressMaxLength = 50;
         public const int CustomerFirstNameMaxLength = 50;
         public const int CustomerLastNameMaxLength = 50;
+        public const int CustomerPhoneNumberMaxLength = 15;
 
         public const int CityNameMaxLength = 50;
         public const int PostCodeMaxLength = 30;
@@ -16,6 +17,7 @@
 
         public const int CleaningNameMaxLength = 50;
         public const int PropertyNameMaxLength = 50;
+        public const int CleaningTypeMaxLength = 30;
 
         public const int CountryMaxLength = 100;
         public const int StreetMaxLength = 100;

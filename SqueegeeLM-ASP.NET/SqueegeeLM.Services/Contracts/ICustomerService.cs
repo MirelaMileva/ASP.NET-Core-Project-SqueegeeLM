@@ -1,11 +1,13 @@
 ﻿namespace SqueegeeLM.Services.Contracts
 {
-    using SqueegeeLM.Web.Models.Customer;
+    using SqueegeeLM.Data.Models;
 
     public interface ICustomerService
     {
-        void BecomeCustomer(BecomeCustomerServiceModel model);
+        int BecomeCustomer(string firstName, string lastName, string phoneNumber, string userId);
 
-        //bool UserIsCustomer();
+        bool UserIsCustomer(string userId);
+
+        int GetCustomerId(string userId);
     }
 }

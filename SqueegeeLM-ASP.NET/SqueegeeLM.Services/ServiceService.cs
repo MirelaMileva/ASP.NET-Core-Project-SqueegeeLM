@@ -2,7 +2,6 @@
 {
     using SqueegeeLM.Data.Models;
     using SqueegeeLM.Services.Contracts;
-    using SqueegeeLM.Services.Models.Service;
     using SqueegeeLM.Web.Data;
     using SqueegeeLM.Web.Models.Service;
     using System.Collections.Generic;
@@ -16,18 +15,20 @@
             this.data = data;
         }
 
-        public void AddService(AddServiceServiceModel model)
+        public Service AddService(int cleaningCategoryId, int propertyCategoryId, int frequencyId, string cleaningType)
         {
             var service = new Service
             {
-                CleaningCategoryId = model.CleaningCategoryId,
-                PropertyCategoryId = model.PropertyCategoryId,
-                FrequencyId = model.FrequencyId,
-                CleaningType = model.CleaningType
+                CleaningCategoryId = cleaningCategoryId,
+                PropertyCategoryId = propertyCategoryId,
+                FrequencyId = frequencyId,
+                CleaningType = cleaningType
             };
 
             this.data.Services.Add(service);
             this.data.SaveChanges();
+
+            return service;
         }
 
         public IEnumerable<CleaningCategoryServiceModel> GetCleaningCategories()
@@ -64,11 +65,6 @@
                    Name = c.Name
                })
                .ToList();
-        }
-
-        //public bool UserIsCustomer()
-        //    => !this.data
-        //    .Customers
-        //    .Any(c => c.UserId == this.User.GetId());
+        }          
     }
 }

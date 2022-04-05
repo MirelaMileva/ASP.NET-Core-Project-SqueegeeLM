@@ -1,6 +1,5 @@
 ﻿namespace SqueegeeLM.Data.Models
 {
-    using SqueegeeLM.Data.Models.Enums;
     using System.ComponentModel.DataAnnotations;
 
     using static DataConstants;

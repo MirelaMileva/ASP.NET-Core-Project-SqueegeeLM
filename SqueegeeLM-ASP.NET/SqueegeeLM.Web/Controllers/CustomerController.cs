@@ -3,6 +3,8 @@
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using SqueegeeLM.Services.Contracts;
+    using SqueegeeLM.Web.Extensions;
+    using SqueegeeLM.Web.Models.Customer;
 
     public class CustomerController : Controller
     {
@@ -12,27 +14,38 @@
         {
             service = this.service;
         }
+
         [Authorize]
         public IActionResult Create()
         {
             return View();
         }
 
-        //[HttpPost]
-        //[Authorize]
-        //public IActionResult Create(BecomeCustomerViewModel model)
-        //{
-        //    var userExist = this.service.UserIsCustomer();
+        [HttpPost]
+        [Authorize]
+        public IActionResult Create(BecomeCustomerViewModel model)
+        {
+            var userId = this.User.GetId();
 
-        //    if (userExist)
-        //    {
-        //        return BadRequest();
-        //    }
+            //var userExist = this.service.UserIsCustomer(userId);
 
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
-        //}
+            //if (userExist)
+            //{
+            //    return BadRequest();
+            //}
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var customerId = this.service.BecomeCustomer(
+                model.FirstName,
+                model.LastName,
+                model.PhoneNumber,
+                userId);
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

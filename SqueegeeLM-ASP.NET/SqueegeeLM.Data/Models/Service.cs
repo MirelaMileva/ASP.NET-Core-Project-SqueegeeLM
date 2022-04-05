@@ -1,8 +1,9 @@
 ﻿namespace SqueegeeLM.Data.Models
 {
-    using SqueegeeLM.Data.Models.Enums;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
+
+    using static DataConstants;
 
     public class Service
     {
@@ -32,6 +33,8 @@
         [ForeignKey(nameof(FrequencyId))]
         public Frequency Frequency { get; set; }
 
-        public CleaningType CleaningType { get; set; }
+        [Required]
+        [MaxLength(CleaningTypeMaxLength)]
+        public string CleaningType { get; set; }
     }
 }

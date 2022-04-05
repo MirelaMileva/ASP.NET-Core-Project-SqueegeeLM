@@ -25,6 +25,10 @@
         public string LastName { get; set; }
 
         [Required]
+        [MaxLength(CustomerPhoneNumberMaxLength)]
+        public string PhoneNumber { get; set; }
+
+        [Required]
         public string UserId { get; set; }
 
         public ICollection<Address> Addresses { get; set; }

@@ -18,10 +18,9 @@
                 }
             </select>
         </div>
-        <div class="form-group">
+        <div class="form-gruop">
             <label asp-for="CleaningType">Cleaning Type</label>
-            <select asp-for="CleaningType" class="form-control" asp-items="Html.GetEnumSelectList<CleaningType>()">               
-            </select>
+            <input asp-for="CleaningType" class="form-control" placeholder="Once Only, Monthly, Quaterly, etc..." />
         </div>
         <div class="form-group">
             <label asp-for="PropertyCategoryId">Property</label>

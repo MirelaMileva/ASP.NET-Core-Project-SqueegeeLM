@@ -25,5 +25,10 @@
 
             return View(model);
         }
+
+        //public IActionResult UserAppoitments()
+        //{
+
+        //}
     }
 }

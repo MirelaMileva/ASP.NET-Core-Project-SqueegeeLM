@@ -8,10 +8,10 @@ using SqueegeeLM.Web.Data;
 
 #nullable disable
 
-namespace SqueegeeLM.Web.Data.Migrations
+namespace SqueegeeLM.Data.Migrations
 {
     [DbContext(typeof(SqueegeeLMDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class SqueegeeLMDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -339,6 +339,11 @@ namespace SqueegeeLM.Web.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
+
                     b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
@@ -427,8 +432,10 @@ namespace SqueegeeLM.Web.Data.Migrations
                     b.Property<int>("CleaningCategoryId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CleaningType")
-                        .HasColumnType("int");
+                    b.Property<string>("CleaningType")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
 
                     b.Property<int>("FrequencyId")
                         .HasColumnType("int");

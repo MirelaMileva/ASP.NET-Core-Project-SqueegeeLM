@@ -2,23 +2,28 @@
 {
     using Microsoft.AspNetCore.Mvc;
     using SqueegeeLM.Services.Contracts;
+    using SqueegeeLM.Web.Extensions;
     using SqueegeeLM.Web.Models.Service;
 
     public class ServiceController : BaseController
     {
         private readonly IServiceService service;
+        private readonly ICustomerService customerService;
 
-        public ServiceController(IServiceService service)
+        public ServiceController(IServiceService service, ICustomerService customerService)
         {
             this.service = service;
+            this.customerService = customerService;
         }
 
         public IActionResult AddService()
         {
-            //if (!this.service.UserIsCustomer)
-            //{
-            //    return RedirectToAction("Create", "Customer");
-            //}
+            var userId = this.User.GetId();
+
+            if (!UserIsCustomer(userId))
+            {
+                return RedirectToAction("Create", "Customer");
+            }
 
             return View(new AddServiceViewModel
                {
@@ -31,6 +36,13 @@
         [HttpPost]
         public IActionResult AddService(AddServiceViewModel model)
         {
+            var userId = this.User.GetId();
+
+            if (GetCustomerId(userId) == 0)
+            {
+                return RedirectToAction("Create", "Customer");
+            }
+
             if (!this.service.GetCleaningCategories().Any(m => m.Id == model.CleaningCategoryId))
             {
                 this.ModelState.AddModelError(nameof(model.CleaningCategoryId), "Cleaning Category does not exist.");
@@ -55,8 +67,20 @@
                 return View(model);
             }
 
+            var createService = this.service.AddService(
+                model.CleaningCategoryId,
+                model.PropertyCategoryId,
+                model.FrequencyId,
+                model.CleaningType);
+
             return RedirectToAction("AddAppoitment", "Appoitment");
         }
+
+        private int GetCustomerId(string userId)
+            => this.customerService.GetCustomerId(userId);
+
+        private bool UserIsCustomer(string userId)
+            => this.customerService.UserIsCustomer(userId);
 
     }
 }

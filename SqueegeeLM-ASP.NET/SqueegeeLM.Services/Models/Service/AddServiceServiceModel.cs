@@ -1,6 +1,5 @@
 ﻿namespace SqueegeeLM.Services.Models.Service
 {
-    using SqueegeeLM.Data.Models.Enums;
     using SqueegeeLM.Web.Models.Service;
 
     public class AddServiceServiceModel
@@ -9,7 +8,7 @@
 
         public IEnumerable<CleaningCategoryServiceModel> CleaningCategories { get; set; }
 
-        public CleaningType CleaningType { get; set; }
+        public string CleaningType { get; set; }
 
         public int PropertyCategoryId { get; set; }
 
