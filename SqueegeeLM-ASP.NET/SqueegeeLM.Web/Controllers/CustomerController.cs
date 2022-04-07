@@ -8,11 +8,11 @@
 
     public class CustomerController : Controller
     {
-        private readonly ICustomerService service;
+        private readonly ICustomerService customerService;
 
-        public CustomerController(ICustomerService service)
+        public CustomerController(ICustomerService customerService)
         {
-            service = this.service;
+            this.customerService = customerService;
         }
 
         [Authorize]
@@ -39,7 +39,7 @@
                 return View(model);
             }
 
-            var customerId = this.service.BecomeCustomer(
+            var customerId = this.customerService.BecomeCustomer(
                 model.FirstName,
                 model.LastName,
                 model.PhoneNumber,

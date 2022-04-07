@@ -3,7 +3,6 @@
     using SqueegeeLM.Data.Models;
     using SqueegeeLM.Services.Contracts;
     using SqueegeeLM.Web.Data;
-    using System.Security.Claims;
 
     public class CustomerService : ICustomerService
     {

@@ -1,6 +1,7 @@
 ﻿namespace SqueegeeLM.Web.Models.Appoitment
 {
     using SqueegeeLM.Data.Models;
+    using System.ComponentModel.DataAnnotations;
 
     public class AppoitmentViewModel
     {
@@ -8,6 +9,7 @@
 
         public int CustomerId { get; set; }
 
+        [Display(Name = "Customer Name")]
         public Customer Customer { get; set; }
 
         public bool IsBooked { get; set; }

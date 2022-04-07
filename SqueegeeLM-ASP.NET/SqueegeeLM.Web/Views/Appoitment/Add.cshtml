@@ -5,30 +5,11 @@
 
     <form>
         <div class="form-group">
-            <label asp-for="CustomerId">Customer</label>
-            <input asp-for="CustomerId" class="form-control">
-        </div>
-        <div class="form-group">
-            <label asp-for="IsBooked"></label>
-            <input asp-for="IsBooked" class="form-control">
-        </div>
-        <div class="form-group">
-            <label asp-for="Services">Services</label>
-            <select asp-for="Services" class="form-control">
-                <option value="">Options</option>
-                @foreach (var service in Model.Services)
-                {
-                    <option value="">@service.CleaningCategories</option>
-                    <option value="">@service.PropertyCategories</option>
-                    <option value="">@service.Frequency</option>
-                    <option value="">@service.CleaningType</option>
-                }
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="exampleFormControlTextarea1">Example textarea</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <label asp-for="Customer">Customer Name</label>
+            <input asp-for="Customer" class="form-control">
         </div>
     </form>
+    <partial name="_DatePicker" />
+    <partial name="_AllServices" />
 
 </div>
