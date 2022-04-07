@@ -15,9 +15,12 @@
             this.data = data;
         }
 
-        public Service AddService(int cleaningCategoryId, int propertyCategoryId, int frequencyId, string cleaningType)
+        public string AddService(int cleaningCategoryId,  
+                 int propertyCategoryId, 
+                 int frequencyId, 
+                 string cleaningType)
         {
-            var service = new Service
+            var serviceData = new Service
             {
                 CleaningCategoryId = cleaningCategoryId,
                 PropertyCategoryId = propertyCategoryId,
@@ -25,10 +28,10 @@
                 CleaningType = cleaningType
             };
 
-            this.data.Services.Add(service);
+            this.data.Services.Add(serviceData);
             this.data.SaveChanges();
 
-            return service;
+            return serviceData.Id.ToString();
         }
 
         public IEnumerable<CleaningCategoryServiceModel> GetCleaningCategories()

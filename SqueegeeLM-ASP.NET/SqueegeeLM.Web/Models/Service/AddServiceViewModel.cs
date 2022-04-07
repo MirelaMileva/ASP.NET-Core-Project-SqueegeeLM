@@ -8,6 +8,7 @@
         public int CleaningCategoryId { get; set; }
         public IEnumerable<CleaningCategoryServiceModel> CleaningCategories { get; set; }
 
+        [Required]
         [Display(Name = "Cleaning Type")]
         public string CleaningType { get; set; }
 

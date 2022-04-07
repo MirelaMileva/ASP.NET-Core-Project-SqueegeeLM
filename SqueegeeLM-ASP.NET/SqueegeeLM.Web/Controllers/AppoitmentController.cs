@@ -23,12 +23,15 @@
                 return View(model);
             }
 
+            //var customerServices = this.appoitmentService.GetAllServices();
+
+            var createAppoitment = this.appoitmentService.AddAppoitment(
+                model.CustomerId,
+                model.Date,
+                model.IsBooked, 
+                model.Services);
+
             return View(model);
         }
-
-        //public IActionResult UserAppoitments()
-        //{
-
-        //}
     }
 }

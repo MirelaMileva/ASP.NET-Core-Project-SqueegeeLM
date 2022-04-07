@@ -16,6 +16,7 @@
             this.customerService = customerService;
         }
 
+        [HttpGet]
         public IActionResult AddService()
         {
             var userId = this.User.GetId();
@@ -73,11 +74,11 @@
                 model.FrequencyId,
                 model.CleaningType);
 
-            return RedirectToAction("AddAppoitment", "Appoitment");
+            return RedirectToAction("Add", "Appoitment");
         }
 
         private int GetCustomerId(string userId)
-            => this.customerService.GetCustomerId(userId);
+            => this.customerService.GetCustomerUserId(userId);
 
         private bool UserIsCustomer(string userId)
             => this.customerService.UserIsCustomer(userId);

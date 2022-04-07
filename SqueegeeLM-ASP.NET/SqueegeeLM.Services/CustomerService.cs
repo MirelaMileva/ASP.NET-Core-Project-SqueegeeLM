@@ -36,11 +36,17 @@
                 .Customers
                 .Any(c => c.UserId == userId);
 
-        public int GetCustomerId(string userId)
+        public int GetCustomerUserId(string userId)
             => this.data
             .Customers
             .Where(c => c.UserId == userId)
             .Select(c => c.Id)
+            .FirstOrDefault();
+
+        public Customer GetCustomer(int customerId)
+            => this.data
+            .Customers
+            .Where(c => c.Id == customerId)
             .FirstOrDefault();
     }
 }

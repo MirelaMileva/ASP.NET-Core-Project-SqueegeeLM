@@ -9,7 +9,7 @@
 
     <form method="post">
         <div class="form-group">
-            <label asp-for="CleaningCategoryId">Cleaning Category</label>
+            <label asp-for="CleaningCategoryId"></label>
             <select asp-for="CleaningCategoryId" class="form-control">
                 <option value="">Options</option>
                 @foreach (var category in Model.CleaningCategories)
@@ -19,11 +19,11 @@
             </select>
         </div>
         <div class="form-gruop">
-            <label asp-for="CleaningType">Cleaning Type</label>
+            <label asp-for="CleaningType"></label>
             <input asp-for="CleaningType" class="form-control" placeholder="Outside, Inside, Outside and Inside, etc..." />
         </div>
         <div class="form-group">
-            <label asp-for="PropertyCategoryId">Property</label>
+            <label asp-for="PropertyCategoryId"></label>
             <select asp-for="PropertyCategoryId " class="form-control">
                 <option value="">Options</option>
                 @foreach (var category in Model.PropertyCategories)
@@ -33,7 +33,7 @@
             </select>
         </div>
         <div class="form-group">
-            <label asp-for="FrequencyId">Frequency</label>
+            <label asp-for="FrequencyId"></label>
             <select asp-for="FrequencyId " class="form-control">
                 <option value="">Options</option>
                 @foreach (var category in Model.Frequency)

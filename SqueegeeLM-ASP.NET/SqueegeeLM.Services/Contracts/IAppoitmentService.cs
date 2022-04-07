@@ -1,12 +1,13 @@
 ﻿namespace SqueegeeLM.Services.Contracts
 {
+    using SqueegeeLM.Data.Models;
     using SqueegeeLM.Services.Models.Appoitment;
-    using SqueegeeLM.Services.Models.Appoitments;
 
     public interface IAppoitmentService
     {
-        void AddAppoitment(AppoitmentServiceModel model);
+        string AddAppoitment(int customerId, DateTime date, bool isBooked, IEnumerable<Service> service);
 
-        List<ServiceListServiceModel> GetAllServices();
+        IEnumerable<ServiceListServiceModel> GetAllServices();
+       
     }
 }

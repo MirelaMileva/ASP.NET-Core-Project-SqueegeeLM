@@ -5,9 +5,9 @@
 
     public interface IServiceService
     {
-        Service AddService(
-            int cleaningCategoryId, 
-            int propertyCategoryId, 
+        string AddService(
+            int cleaningCategoryId,
+            int propertyCategoryId,
             int frequencyId,
             string cleaningType);
 

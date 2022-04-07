@@ -3,7 +3,6 @@
     using SqueegeeLM.Data.Models;
     using SqueegeeLM.Services.Contracts;
     using SqueegeeLM.Services.Models.Appoitment;
-    using SqueegeeLM.Services.Models.Appoitments;
     using SqueegeeLM.Web.Data;
 
     public class AppoitmentService : IAppoitmentService
@@ -15,23 +14,25 @@
             this.data = data;
         }
 
-        public void AddAppoitment(AppoitmentServiceModel model)
+        public string AddAppoitment(int customerId, DateTime date, bool isBooked, IEnumerable<ServiceListServiceModel> service)
         {
-            var services = this.data.Services;
+            //var services = this.data.Services;
 
             var appoitment = new Appoitment
             {
-                Date = model.Date,
-                CustomerId = model.CustomerId,
-                IsBooked = model.IsBooked,
-                Services = services
+                Date = date,
+                CustomerId = customerId,
+                IsBooked = isBooked,
+                Services = service
             };
 
             this.data.Appoitments.Add(appoitment);
             this.data.SaveChanges();
+
+            return appoitment.Id.ToString();
         }
 
-        public List<ServiceListServiceModel> GetAllServices()
+        public IEnumerable<ServiceListServiceModel> GetAllServices()
         {
             return this.data
                 .Services
