@@ -5,7 +5,7 @@
 
     public interface IAppoitmentService
     {
-        string AddAppoitment(int customerId, DateTime date, bool isBooked, IEnumerable<Service> service);
+        //string AddAppoitment(int customerId, DateTime date, bool isBooked, IEnumerable<ServiceListServiceModel> service);
 
         IEnumerable<ServiceListServiceModel> GetAllServices();
        

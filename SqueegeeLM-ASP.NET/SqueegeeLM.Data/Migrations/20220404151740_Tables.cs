@@ -1,10 +1,8 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
-
-#nullable disable
-
-namespace SqueegeeLM.Data.Migrations
+﻿namespace SqueegeeLM.Data.Migrations
 {
+    using System;
+    using Microsoft.EntityFrameworkCore.Migrations; 
+
     public partial class Tables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

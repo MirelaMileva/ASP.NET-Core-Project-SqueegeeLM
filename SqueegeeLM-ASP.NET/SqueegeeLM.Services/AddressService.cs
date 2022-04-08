@@ -15,9 +15,9 @@
             this.customerService = customerService;
         }
 
-        public void AddAddressToCustomer(int cusotmerId, Address address)
+        public void AddAddressToCustomer(int customerId, Address address)
         {
-            var customer = this.customerService.GetCustomer(cusotmerId);
+            var customer = this.customerService.GetCustomerId(customerId);
 
             customer.Addresses.Add(address);
 

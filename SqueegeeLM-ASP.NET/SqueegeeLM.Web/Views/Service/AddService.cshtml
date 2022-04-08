@@ -17,10 +17,12 @@
                     <option value=@category.Id>@category.Name</option>
                 }
             </select>
+            <span asp-validation-for="CleaningCategoryId" class="small text-danger"></span>
         </div>
         <div class="form-gruop">
             <label asp-for="CleaningType"></label>
             <input asp-for="CleaningType" class="form-control" placeholder="Outside, Inside, Outside and Inside, etc..." />
+            <span asp-validation-for="CleaningType" class="small text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="PropertyCategoryId"></label>
@@ -31,6 +33,7 @@
                     <option value=@category.Id>@category.Name</option>
                 }
             </select>
+            <span asp-validation-for="PropertyCategoryId" class="small text-danger"></span>
         </div>
         <div class="form-group">
             <label asp-for="FrequencyId"></label>
@@ -41,6 +44,7 @@
                     <option value=@category.Id>@category.Name</option>
                 }
             </select>
+            <span asp-validation-for="FrequencyId" class="small text-danger"></span>
         </div>
         <input class="btn btn-primary" type="submit" value="Submit" />
     </form>

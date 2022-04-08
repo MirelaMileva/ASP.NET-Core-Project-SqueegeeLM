@@ -14,23 +14,23 @@
             this.data = data;
         }
 
-        public string AddAppoitment(int customerId, DateTime date, bool isBooked, IEnumerable<ServiceListServiceModel> service)
-        {
-            //var services = this.data.Services;
+        //public string AddAppoitment(int customerId, DateTime date, bool isBooked, IEnumerable<ServiceListServiceModel> service)
+        //{
+        //    //var services = this.data.Services;
 
-            var appoitment = new Appoitment
-            {
-                Date = date,
-                CustomerId = customerId,
-                IsBooked = isBooked,
-                Services = service
-            };
+        //    //var appoitment = new Appoitment
+        //    //{
+        //    //    Date = date,
+        //    //    CustomerId = customerId,
+        //    //    IsBooked = isBooked,
+        //    //    Services = service
+        //    //};
 
-            this.data.Appoitments.Add(appoitment);
-            this.data.SaveChanges();
+        //    //this.data.Appoitments.Add(appoitment);
+        //    //this.data.SaveChanges();
 
-            return appoitment.Id.ToString();
-        }
+        //    //return appoitment.Id.ToString();
+        //}
 
         public IEnumerable<ServiceListServiceModel> GetAllServices()
         {

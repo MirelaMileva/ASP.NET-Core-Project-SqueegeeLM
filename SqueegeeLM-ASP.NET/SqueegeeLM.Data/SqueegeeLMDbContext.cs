@@ -1,12 +1,11 @@
 ﻿namespace SqueegeeLM.Web.Data
 {
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
 
     using SqueegeeLM.Data.Models;
 
-    public class SqueegeeLMDbContext : IdentityDbContext<IdentityUser>
+    public class SqueegeeLMDbContext : IdentityDbContext<User>
     {
         public SqueegeeLMDbContext(DbContextOptions<SqueegeeLMDbContext> options)
             : base(options)
@@ -26,7 +25,7 @@
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Customer>()
-                .HasOne<IdentityUser>()
+                .HasOne<User>()
                 .WithOne()
                 .HasForeignKey<Customer>(c => c.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
