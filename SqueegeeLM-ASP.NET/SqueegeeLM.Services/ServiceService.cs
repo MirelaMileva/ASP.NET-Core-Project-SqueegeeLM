@@ -9,13 +9,15 @@
     public class ServiceService : IServiceService
     {
         private readonly SqueegeeLMDbContext data;
+        private readonly IAppoitmentService appoitmentService;
 
-        public ServiceService(SqueegeeLMDbContext data)
+        public ServiceService(SqueegeeLMDbContext data, IAppoitmentService appoitmentService)
         {
             this.data = data;
+            this.appoitmentService = appoitmentService;
         }
 
-        public string AddService(int cleaningCategoryId,  
+        public Service AddService(int cleaningCategoryId,  
                  int propertyCategoryId, 
                  int frequencyId, 
                  string cleaningType)
@@ -31,7 +33,15 @@
             this.data.Services.Add(serviceData);
             this.data.SaveChanges();
 
-            return serviceData.Id.ToString();
+            return serviceData;
+        }
+        public void AddServiceToAppoitment(int customerId, Service service)
+        {
+            var appoitment = this.appoitmentService.GetAppoitmentId(customerId);
+
+            appoitment.Services.Add(service);
+
+            this.data.SaveChanges();
         }
 
         public IEnumerable<CleaningCategoryServiceModel> GetCleaningCategories()

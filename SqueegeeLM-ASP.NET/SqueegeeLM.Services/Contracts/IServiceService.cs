@@ -5,11 +5,13 @@
 
     public interface IServiceService
     {
-        string AddService(
+        Service AddService(
             int cleaningCategoryId,
             int propertyCategoryId,
             int frequencyId,
             string cleaningType);
+
+        void AddServiceToAppoitment(int customerId, Service service);
 
         IEnumerable<CleaningCategoryServiceModel> GetCleaningCategories();
 

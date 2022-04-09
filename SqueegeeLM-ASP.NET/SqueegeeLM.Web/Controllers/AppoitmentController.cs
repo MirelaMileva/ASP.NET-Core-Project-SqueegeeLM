@@ -7,10 +7,12 @@
     public class AppoitmentController : BaseController
     {
         private readonly IAppoitmentService appoitmentService;
+        private readonly IServiceService serviceService;
 
-        public AppoitmentController(IAppoitmentService appoitmentService)
+        public AppoitmentController(IAppoitmentService appoitmentService, IServiceService serviceService)
         {
             this.appoitmentService = appoitmentService;
+            this.serviceService = serviceService;
         }
 
         public IActionResult Add() => View();
@@ -23,15 +25,12 @@
                 return View(model);
             }
 
-            //var customerServices = this.appoitmentService.GetAllServices();
+            var createAppoitment = this.appoitmentService.AddAppoitment(
+                model.CustomerId,
+                model.Date,
+                model.IsBooked);
 
-            //var createAppoitment = this.appoitmentService.AddAppoitment(
-            //    model.CustomerId,
-            //    model.Date,
-            //    model.IsBooked, 
-            //    model.Services);
-
-            return View(model);
+            return RedirectToAction("AddService", "Service");
         }
     }
 }

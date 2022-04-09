@@ -12,6 +12,8 @@
             services.AddScoped<IServiceService, ServiceService>();
             services.AddScoped<IAppoitmentService, AppoitmentService>();
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IAddressService, AddressService>();
+            services.AddScoped<ICityService, CityService>();
 
             return services;
         }

@@ -9,11 +9,16 @@
     {
         private readonly IServiceService service;
         private readonly ICustomerService customerService;
+        private readonly IAppoitmentService appoitmentService;
 
-        public ServiceController(IServiceService service, ICustomerService customerService)
+        public ServiceController(
+            IServiceService service, 
+            ICustomerService customerService,
+            IAppoitmentService appoitmentService)
         {
             this.service = service;
             this.customerService = customerService;
+            this.appoitmentService = appoitmentService;
         }
 
         [HttpGet]
@@ -74,7 +79,13 @@
                 model.FrequencyId,
                 model.CleaningType);
 
-            return RedirectToAction("Add", "Appoitment");
+            var customerId = this.customerService.GetCustomerUserId(userId);
+
+            var appoitment = this.appoitmentService.GetAppoitmentId(customerId);
+
+            this.service.AddServiceToAppoitment(customerId, createService);
+
+            return RedirectToAction("Index", "Home");
         }
 
         private int GetCustomerId(string userId)

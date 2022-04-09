@@ -8,29 +8,37 @@
     public class AppoitmentService : IAppoitmentService
     {
         private readonly SqueegeeLMDbContext data;
+        private readonly ICustomerService customerService;
 
-        public AppoitmentService(SqueegeeLMDbContext data)
+        public AppoitmentService(SqueegeeLMDbContext data, ICustomerService customerService)
         {
             this.data = data;
+            this.customerService = customerService;
         }
 
-        //public string AddAppoitment(int customerId, DateTime date, bool isBooked, IEnumerable<ServiceListServiceModel> service)
-        //{
-        //    //var services = this.data.Services;
+        public string AddAppoitment(int customerId, DateTime date, bool isBooked)
+        {
+            var appoitment = new Appoitment
+            {
+                Date = date,
+                CustomerId = customerId,
+                IsBooked = isBooked
+            };
 
-        //    //var appoitment = new Appoitment
-        //    //{
-        //    //    Date = date,
-        //    //    CustomerId = customerId,
-        //    //    IsBooked = isBooked,
-        //    //    Services = service
-        //    //};
+            this.data.Appoitments.Add(appoitment);
+            this.data.SaveChanges();
 
-        //    //this.data.Appoitments.Add(appoitment);
-        //    //this.data.SaveChanges();
+            return appoitment.Id.ToString();
+        }
 
-        //    //return appoitment.Id.ToString();
-        //}
+        public Appoitment GetAppoitmentId(int customerId)
+        {
+            var appoitment = this.data.Appoitments
+                .Where(a => a.CustomerId == customerId)
+                .FirstOrDefault();
+
+            return appoitment;
+        }
 
         public IEnumerable<ServiceListServiceModel> GetAllServices()
         {
@@ -38,9 +46,10 @@
                 .Services
                 .Select(s => new ServiceListServiceModel
                 {
-                    CleaningCategory = s.CleaningCategory.ToString(),
-                    PropertyCategory = s.PropertyCategory.ToString(),
-                    Frequency = s.Frequency.ToString()
+                    CleaningType = s.CleaningType,
+                    CleaningCategory = s.CleaningCategory.Name,
+                    PropertyCategory = s.PropertyCategory.Name,
+                    Frequency = s.Frequency.Name
                 })
                 .ToList();
         }

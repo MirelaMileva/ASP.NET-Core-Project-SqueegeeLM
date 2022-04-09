@@ -1,5 +1,9 @@
 ﻿@model AppoitmentViewModel
 
+@{
+    ViewData["Title"] = "Book Appoitment";
+}
+
 <div class="row">
     <h2 class="heading-margin text-center">Book Appoitment</h2>
 
@@ -8,8 +12,8 @@
             <label asp-for="Customer">Customer Name</label>
             <input asp-for="Customer" class="form-control">
         </div>
-    </form>
-    <partial name="_DatePicker" />
-    <partial name="_AllServices" />
 
+        <partial name="_DatePicker" />
+        <input class="btn btn-primary mt-3" type="submit" value="Submit" />
+    </form>
 </div>
