@@ -1,9 +1,11 @@
-﻿namespace SqueegeeLM.Data.Migrations
-{
-    using System;
-    using Microsoft.EntityFrameworkCore.Migrations; 
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class Tables : Migration
+#nullable disable
+
+namespace SqueegeeLM.Data.Migrations
+{
+    public partial class RecreateTables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,6 +28,7 @@
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FullName = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

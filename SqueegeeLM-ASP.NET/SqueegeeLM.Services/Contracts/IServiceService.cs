@@ -15,8 +15,14 @@
 
         IEnumerable<CleaningCategoryServiceModel> GetCleaningCategories();
 
+        bool CleaningCategoryExists(int cleaningCategoryId);
+
         IEnumerable<PropertyCategoryServiceModel> GetPropertyCategories();
 
+        bool PropertyCategoryExists(int properyCategoryId);
+
         IEnumerable<FrequencyServiceModel> GetFrequencies();
+
+        bool FrequencyExists(int frequencyId);
     }
 }

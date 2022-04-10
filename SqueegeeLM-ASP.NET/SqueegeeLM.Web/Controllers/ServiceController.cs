@@ -21,7 +21,6 @@
             this.appoitmentService = appoitmentService;
         }
 
-        [HttpGet]
         public IActionResult AddService()
         {
             var userId = this.User.GetId();
@@ -49,17 +48,17 @@
                 return RedirectToAction("Create", "Customer");
             }
 
-            if (!this.service.GetCleaningCategories().Any(m => m.Id == model.CleaningCategoryId))
+            if (!this.service.CleaningCategoryExists(model.CleaningCategoryId))
             {
                 this.ModelState.AddModelError(nameof(model.CleaningCategoryId), "Cleaning Category does not exist.");
             }
 
-            if (!this.service.GetPropertyCategories().Any(m => m.Id == model.PropertyCategoryId))
+            if (!this.service.PropertyCategoryExists(model.PropertyCategoryId))
             {
                 this.ModelState.AddModelError(nameof(model.PropertyCategoryId), "Property Category does not exist.");
             }
 
-            if (!this.service.GetFrequencies().Any(m => m.Id == model.FrequencyId))
+            if (!this.service.FrequencyExists(model.FrequencyId))
             {
                 this.ModelState.AddModelError(nameof(model.FrequencyId), "Frequency does not exist.");
             }

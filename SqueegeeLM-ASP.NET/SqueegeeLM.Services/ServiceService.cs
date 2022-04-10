@@ -56,6 +56,9 @@
                 .ToList();
         }
 
+        public bool CleaningCategoryExists(int cleaningCategoryId)
+            => this.data.CleaningCategories.Any(c => c.Id == cleaningCategoryId);
+
         public IEnumerable<FrequencyServiceModel> GetFrequencies()
         {
             return this.data
@@ -68,6 +71,9 @@
                .ToList();
         }
 
+        public bool FrequencyExists(int frequencyId)
+            => this.data.Frequencies.Any(c => c.Id == frequencyId);
+
         public IEnumerable<PropertyCategoryServiceModel> GetPropertyCategories()
         {
             return this.data
@@ -78,6 +84,9 @@
                    Name = c.Name
                })
                .ToList();
-        }          
+        }
+
+        public bool PropertyCategoryExists(int propertyCategoryId)
+    => this.data.PropertyCategories.Any(c => c.Id == propertyCategoryId);
     }
 }

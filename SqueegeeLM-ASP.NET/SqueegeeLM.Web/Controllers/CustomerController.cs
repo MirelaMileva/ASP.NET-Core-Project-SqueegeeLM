@@ -10,16 +10,11 @@
     {
         private readonly ICustomerService customerService;
 
-        public CustomerController(ICustomerService customerService)
-        {
-            this.customerService = customerService;
-        }
+        public CustomerController(ICustomerService customerService) 
+            => this.customerService = customerService;
 
         [Authorize]
-        public IActionResult Create()
-        {
-            return View();
-        }
+        public IActionResult Create() => View();
 
         [HttpPost]
         [Authorize]

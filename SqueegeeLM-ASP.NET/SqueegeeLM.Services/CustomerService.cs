@@ -8,10 +8,8 @@
     {
         private readonly SqueegeeLMDbContext data;
 
-        public CustomerService(SqueegeeLMDbContext data)
-        {
-            this.data = data;
-        }
+        public CustomerService(SqueegeeLMDbContext data) 
+            => this.data = data;
 
         public int BecomeCustomer(string firstName, string lastName, string phoneNumber, string userId)
         {

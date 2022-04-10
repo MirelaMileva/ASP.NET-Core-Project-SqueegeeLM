@@ -2,6 +2,7 @@
 {
     using SqueegeeLM.Data.Models;
     using SqueegeeLM.Services.Models.Appoitment;
+    using SqueegeeLM.Services.Models.Appoitments;
 
     public interface IAppoitmentService
     {
@@ -10,5 +11,9 @@
         IEnumerable<ServiceListServiceModel> GetAllServices();
 
         public Appoitment GetAppoitmentId(int customerId);
+
+        IEnumerable<AppoitmentServiceModel> AppoitmentsByUser(string userId);
+
+        AppoitmentServiceModel Details(string id);
     }
 }

@@ -5,6 +5,8 @@
 
     public class AppoitmentViewModel
     {
+        public string Id { get; set; }
+
         [Required]
         [DataType(DataType.DateTime)]
         public DateTime Date { get; set; }

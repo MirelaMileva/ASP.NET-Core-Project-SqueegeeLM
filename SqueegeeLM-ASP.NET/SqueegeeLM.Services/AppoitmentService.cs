@@ -3,6 +3,7 @@
     using SqueegeeLM.Data.Models;
     using SqueegeeLM.Services.Contracts;
     using SqueegeeLM.Services.Models.Appoitment;
+    using SqueegeeLM.Services.Models.Appoitments;
     using SqueegeeLM.Web.Data;
 
     public class AppoitmentService : IAppoitmentService
@@ -52,6 +53,47 @@
                     Frequency = s.Frequency.Name
                 })
                 .ToList();
+        }
+
+        public IEnumerable<AppoitmentServiceModel> AppoitmentsByUser(string userId)
+        {
+            return this.data
+                .Appoitments
+                .Where(a => a.Customer.UserId == userId)
+                .Select(a => new AppoitmentServiceModel
+                {
+                    CustomerId = a.CustomerId,
+                    Date = a.Date,
+                    IsBooked = a.IsBooked,
+                    Services = a.Services.Select(s => new ServiceListServiceModel
+                    {
+                        CleaningType = s.CleaningType,
+                        CleaningCategory = s.CleaningCategory.Name,
+                        PropertyCategory = s.PropertyCategory.Name,
+                        Frequency = s.Frequency.Name
+                    })
+                });
+        }
+
+        public AppoitmentServiceModel Details(string id)
+        {
+            return this.data
+                .Appoitments
+                .Where(a => a.Id.ToString() == id)
+                .Select(a => new AppoitmentServiceModel
+                {
+                    Date = a.Date,
+                    CustomerId = a.CustomerId,
+                    IsBooked = a.IsBooked,
+                    Services = a.Services.Select(s => new ServiceListServiceModel
+                    {
+                        CleaningType = s.CleaningType,
+                        CleaningCategory = s.CleaningCategory.Name,
+                        PropertyCategory = s.PropertyCategory.Name,
+                        Frequency = s.Frequency.Name
+                    })
+                })
+                .FirstOrDefault();
         }
     }
 }
