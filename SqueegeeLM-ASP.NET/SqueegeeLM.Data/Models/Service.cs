@@ -36,5 +36,8 @@
         [Required]
         [MaxLength(CleaningTypeMaxLength)]
         public string CleaningType { get; set; }
+
+        [Required]
+        public int CustomerId { get; set; }
     }
 }

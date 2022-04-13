@@ -20,14 +20,16 @@
         public Service AddService(int cleaningCategoryId,  
                  int propertyCategoryId, 
                  int frequencyId, 
-                 string cleaningType)
+                 string cleaningType,
+                 int customerId)
         {
             var serviceData = new Service
             {
                 CleaningCategoryId = cleaningCategoryId,
                 PropertyCategoryId = propertyCategoryId,
                 FrequencyId = frequencyId,
-                CleaningType = cleaningType
+                CleaningType = cleaningType,
+                CustomerId = customerId
             };
 
             this.data.Services.Add(serviceData);

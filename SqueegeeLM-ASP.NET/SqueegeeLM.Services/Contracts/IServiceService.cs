@@ -9,7 +9,8 @@
             int cleaningCategoryId,
             int propertyCategoryId,
             int frequencyId,
-            string cleaningType);
+            string cleaningType,
+            int customerId);
 
         void AddServiceToAppoitment(int customerId, Service service);
 

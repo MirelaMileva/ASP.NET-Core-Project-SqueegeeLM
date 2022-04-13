@@ -17,19 +17,34 @@
             this.customerService = customerService;
         }
 
-        public string AddAppoitment(int customerId, DateTime date, bool isBooked)
+        public string AddAppoitment(int customerId, DateTime date)
         {
+            var customer = this.customerService.GetCustomerId(customerId);
+
             var appoitment = new Appoitment
             {
                 Date = date,
-                CustomerId = customerId,
-                IsBooked = isBooked
+                CustomerId = customerId
             };
 
             this.data.Appoitments.Add(appoitment);
             this.data.SaveChanges();
 
             return appoitment.Id.ToString();
+        }
+
+        public void AddServiceToCustomerAppoitment(int customerId, Service service)
+        {    
+            var customer = this.customerService.GetCustomerId(customerId);
+
+            var appoitment = this.data
+                .Appoitments
+                .Where(c => c.CustomerId == customer.Id)
+                .FirstOrDefault();
+
+            appoitment.Services.Add(service);
+
+            this.data.SaveChanges();
         }
 
         public Appoitment GetAppoitmentId(int customerId)
@@ -64,7 +79,6 @@
                 {
                     CustomerId = a.CustomerId,
                     Date = a.Date,
-                    IsBooked = a.IsBooked,
                     Services = a.Services.Select(s => new ServiceListServiceModel
                     {
                         CleaningType = s.CleaningType,
@@ -72,7 +86,30 @@
                         PropertyCategory = s.PropertyCategory.Name,
                         Frequency = s.Frequency.Name
                     })
-                });
+                })
+                .ToList();
+        }
+
+        public bool EditAppoitment(string appoitmentId, int customerId)
+        {
+            var appoitmentData = this.data.Appoitments.Find(appoitmentId);
+
+            if (appoitmentData == null)
+            {
+                return false;
+            }
+
+            if(appoitmentData.CustomerId != customerId)
+            {
+                return false;
+            }
+
+            //appoitmentData.Date = appoitment.Date;
+            //appoitmentData.Services = appoitment.Services.Select();
+
+            this.data.SaveChanges();
+
+            return true;
         }
 
         public AppoitmentServiceModel Details(string id)
@@ -84,7 +121,6 @@
                 {
                     Date = a.Date,
                     CustomerId = a.CustomerId,
-                    IsBooked = a.IsBooked,
                     Services = a.Services.Select(s => new ServiceListServiceModel
                     {
                         CleaningType = s.CleaningType,

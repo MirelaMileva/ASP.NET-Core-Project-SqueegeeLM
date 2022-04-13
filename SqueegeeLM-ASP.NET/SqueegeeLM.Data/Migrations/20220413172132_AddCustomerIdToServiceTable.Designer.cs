@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SqueegeeLM.Web.Data;
 
@@ -11,9 +12,10 @@ using SqueegeeLM.Web.Data;
 namespace SqueegeeLM.Data.Migrations
 {
     [DbContext(typeof(SqueegeeLMDbContext))]
-    partial class SqueegeeLMDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220413172132_AddCustomerIdToServiceTable")]
+    partial class AddCustomerIdToServiceTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

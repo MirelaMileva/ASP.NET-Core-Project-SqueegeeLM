@@ -43,6 +43,8 @@
         {
             var userId = this.User.GetId();
 
+            var customerId = this.customerService.GetCustomerUserId(userId);
+
             if (GetCustomerId(userId) == 0)
             {
                 return RedirectToAction("Create", "Customer");
@@ -76,15 +78,14 @@
                 model.CleaningCategoryId,
                 model.PropertyCategoryId,
                 model.FrequencyId,
-                model.CleaningType);
-
-            var customerId = this.customerService.GetCustomerUserId(userId);
+                model.CleaningType,
+                customerId);
 
             var appoitment = this.appoitmentService.GetAppoitmentId(customerId);
 
             this.service.AddServiceToAppoitment(customerId, createService);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("UserAppoitments", "Appoitment");
         }
 
         private int GetCustomerId(string userId)

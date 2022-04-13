@@ -23,8 +23,6 @@
         [ForeignKey(nameof(CustomerId))]
         public Customer Customer { get; set; }
 
-        public bool IsBooked { get; set; }
-
         public List<Service> Services { get; set; }
     }
 }

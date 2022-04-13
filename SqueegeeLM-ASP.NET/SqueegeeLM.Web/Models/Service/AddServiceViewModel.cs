@@ -21,5 +21,7 @@
         public int FrequencyId { get; set; }
 
         public IEnumerable<FrequencyServiceModel> Frequency { get; set; }
+
+        public int CustomerId { get; set; }
     }
 }

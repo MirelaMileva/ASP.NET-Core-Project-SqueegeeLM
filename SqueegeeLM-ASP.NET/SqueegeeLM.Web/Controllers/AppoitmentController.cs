@@ -22,23 +22,36 @@
             this.customerService = customerService;
         }
 
-        public IActionResult AddAppoitment() => View();
+        public IActionResult AddAppoitment()
+        {
+            var userId = this.User.GetId();
+            var customerUserId = this.customerService.GetCustomerUserId(userId);
+
+            if (!this.customerService.UserIsCustomer(userId))
+            {
+                return RedirectToAction(nameof(CustomerController.Create), "Customer");
+            }
+
+            return View();
+        }
 
         [HttpPost]
         [Authorize]
         public IActionResult AddAppoitment(AppoitmentViewModel model)
         {
+            var userId = this.User.GetId();
+
+            var customerId = this.customerService.GetCustomerUserId(userId);
+
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
             var createAppoitment = this.appoitmentService.AddAppoitment(
-                model.CustomerId,
-                model.Date,
-                model.IsBooked);
-
-            //this.appoitmentService.GetAllServices()
+                customerId,
+                model.Date
+                );
 
             return RedirectToAction("AddService", "Service");
         }
@@ -74,7 +87,6 @@
                 Id = id,
                 CustomerId = customerUserId,
                 Date = appoitment.Date,
-                IsBooked = appoitment.IsBooked,
                 Services = appoitment.Services.Select(s => new ServiceListViewModel
                 {
                     CleaningCategories = s.CleaningCategory,
@@ -85,11 +97,12 @@
             });
         }
 
-        [Authorize]
         [HttpPost]
-        public IActionResult Edit(string id, AppoitmentViewModel appoitment)
+        [Authorize]
+        public IActionResult Edit(string id, AppoitmentViewModel appoitmentData)
         {
             var userId = this.User.GetId();
+
             var customerUserId = this.customerService.GetCustomerUserId(userId);
 
             if (!this.customerService.UserIsCustomer(userId))
@@ -99,13 +112,15 @@
 
             if(!ModelState.IsValid)
             {
-                return View(appoitment);
+                return View(appoitmentData);
             }
 
-            var editAppoitment = this.appoitmentService.AddAppoitment(
-                appoitment.CustomerId,
-                appoitment.Date,
-                appoitment.IsBooked);
+            var appoitmentId = this.appoitmentService.GetAppoitmentId(customerUserId);
+
+            //var editAppoitment = this.appoitmentService.EditAppoitment(
+            //    appoitmentId,
+            //    customerUserId);
+            //    //appoitment.IsBooked);
 
             return RedirectToAction(nameof(UserAppoitments));
         }
