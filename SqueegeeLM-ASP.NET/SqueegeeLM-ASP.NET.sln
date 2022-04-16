@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqueegeeLM.Web", "SqueegeeLM.Web\SqueegeeLM.Web.csproj", "{60AF939D-2964-4E4B-8DD4-849C0FA3FBC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqueegeeLM.Web", "SqueegeeLM.Web\SqueegeeLM.Web.csproj", "{60AF939D-2964-4E4B-8DD4-849C0FA3FBC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqueegeeLM.Data", "SqueegeeLM.Data\SqueegeeLM.Data.csproj", "{7ED9DB1C-1A52-4D47-AE5C-EA548EAC2559}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqueegeeLM.Data", "SqueegeeLM.Data\SqueegeeLM.Data.csproj", "{7ED9DB1C-1A52-4D47-AE5C-EA548EAC2559}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqueegeeLM.Services", "SqueegeeLM.Services\SqueegeeLM.Services.csproj", "{AFF61AAB-61A3-4D6D-B647-6D455162AFBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SqueegeeLM.Services", "SqueegeeLM.Services\SqueegeeLM.Services.csproj", "{AFF61AAB-61A3-4D6D-B647-6D455162AFBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqueegeeLM.Test", "SqueegeeLM.Test\SqueegeeLM.Test.csproj", "{A0820995-DE88-4386-8899-8AD75D7DA564}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{AFF61AAB-61A3-4D6D-B647-6D455162AFBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFF61AAB-61A3-4D6D-B647-6D455162AFBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFF61AAB-61A3-4D6D-B647-6D455162AFBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0820995-DE88-4386-8899-8AD75D7DA564}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0820995-DE88-4386-8899-8AD75D7DA564}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0820995-DE88-4386-8899-8AD75D7DA564}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0820995-DE88-4386-8899-8AD75D7DA564}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,7 +19,7 @@
 
         public string AddAppoitment(int customerId, DateTime date)
         {
-            var customer = this.customerService.GetCustomerId(customerId);
+            var customer = this.customerService.GetCustomer(customerId);
 
             var appoitment = new Appoitment
             {
@@ -35,7 +35,7 @@
 
         public void AddServiceToCustomerAppoitment(int customerId, Service service)
         {    
-            var customer = this.customerService.GetCustomerId(customerId);
+            var customer = this.customerService.GetCustomer(customerId);
 
             var appoitment = this.data
                 .Appoitments
@@ -80,18 +80,8 @@
                 .Select(a => new AppoitmentServiceModel
                 {
                     CustomerId = a.CustomerId,
-                    Date = a.Date,
-                    Services = a.Services
-                    .Where(s => s.CustomerId == customerId)
-                    .Select(s => new ServiceListServiceModel
-                    {
-                        CleaningType = s.CleaningType,
-                        CleaningCategory = s.CleaningCategory.Name,
-                        PropertyCategory = s.PropertyCategory.Name,
-                        Frequency = s.Frequency.Name
-                    })
-                })
-                .ToList();
+                    Date = a.Date
+                });
         }
 
         public bool EditAppoitment(string appoitmentId, int customerId, DateTime date)

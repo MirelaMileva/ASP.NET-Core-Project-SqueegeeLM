@@ -41,7 +41,7 @@
             .Select(c => c.Id)
             .FirstOrDefault();
 
-        public Customer GetCustomerId(int customerId)
+        public Customer GetCustomer(int customerId)
             => this.data
             .Customers
             .Where(c => c.Id == customerId)

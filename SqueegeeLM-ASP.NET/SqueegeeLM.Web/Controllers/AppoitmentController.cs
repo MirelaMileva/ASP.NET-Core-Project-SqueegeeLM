@@ -77,7 +77,7 @@
 
             var appoitment = this.appoitmentService.Details(id);
 
-            if(appoitment.CustomerId != customerId)
+            if (appoitment.CustomerId != customerId)
             {
                 return BadRequest();
             }

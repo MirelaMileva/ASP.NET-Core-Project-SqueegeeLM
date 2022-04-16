@@ -10,6 +10,6 @@
 
         int GetCustomerId(string userId);
 
-        Customer GetCustomerId(int customerId);
+        Customer GetCustomer(int customerId);
     }
 }

@@ -18,6 +18,8 @@
 
         public Appoitment GetAppoitmentId(int customerId);
 
+        //IEnumerable<Appoitment> AppoitmentsByUser(string userId);
+
         IEnumerable<AppoitmentServiceModel> AppoitmentsByUser(string userId);
 
         AppoitmentServiceModel Details(string id);

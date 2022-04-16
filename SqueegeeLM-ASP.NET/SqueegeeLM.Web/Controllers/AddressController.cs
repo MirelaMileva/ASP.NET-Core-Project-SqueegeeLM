@@ -53,7 +53,7 @@
 
             this.addressService.AddAddressToCustomer(customer, address);
 
-            return RedirectToAction("UserAppoitment", "Appoitment");
+            return RedirectToAction("UserAppoitments", "Appoitment");
         }
     }
 }
