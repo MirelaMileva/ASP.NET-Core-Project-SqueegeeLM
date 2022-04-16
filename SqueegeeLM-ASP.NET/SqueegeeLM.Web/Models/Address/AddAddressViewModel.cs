@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    using static DataConstants;
+    using static WebConstants;
     public class AddAddressViewModel
     {
         public int Id { get; set; }
@@ -13,6 +13,7 @@
 
         [Required]
         [StringLength(AddressCityNameMaxLength, MinimumLength = AddressCityNameMinLength)]
+        [Display(Name = "City Name")]
         public string CityName { get; set; }
 
         [Required]
@@ -25,6 +26,9 @@
 
         [Required]
         [StringLength(AddressBuildingNumberMaxLength, MinimumLength = AddressBuildingNumberMinLength)]
+        [Display(Name = "Building Number")]
         public string BuildingNumber { get; set; }
+
+        public int CustomerId { get; set; }
     }
 }

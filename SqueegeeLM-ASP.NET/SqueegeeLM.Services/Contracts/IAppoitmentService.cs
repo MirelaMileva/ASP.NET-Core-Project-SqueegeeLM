@@ -8,7 +8,9 @@
     {
         string AddAppoitment(int customerId, DateTime date);
 
-        bool EditAppoitment(string appoitmentId, int customerId);
+        bool EditAppoitment(string appoitmentId, int customerId, DateTime date);
+
+        bool EditAppoitmentServices(string appoitmentId, int customerId, ServiceListServiceModel services);
 
         void AddServiceToCustomerAppoitment(int customerId, Service service);
 

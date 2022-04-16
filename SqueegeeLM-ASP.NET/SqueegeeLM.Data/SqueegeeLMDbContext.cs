@@ -36,12 +36,6 @@
                 .HasForeignKey(a => a.CustomerId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.Entity<Address>()
-                .HasOne(a => a.Customer)
-                .WithMany(a => a.Addresses)
-                .HasForeignKey(a => a.CustomerId)
-                .OnDelete(DeleteBehavior.Restrict);
-
             builder.Entity<Review>()
                 .HasOne(r => r.Customer)
                 .WithMany(r => r.Reviews)

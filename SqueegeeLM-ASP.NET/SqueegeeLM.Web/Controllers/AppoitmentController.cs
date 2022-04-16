@@ -25,7 +25,7 @@
         public IActionResult AddAppoitment()
         {
             var userId = this.User.GetId();
-            var customerUserId = this.customerService.GetCustomerUserId(userId);
+            var customerUserId = this.customerService.GetCustomerId(userId);
 
             if (!this.customerService.UserIsCustomer(userId))
             {
@@ -41,7 +41,7 @@
         {
             var userId = this.User.GetId();
 
-            var customerId = this.customerService.GetCustomerUserId(userId);
+            var customerId = this.customerService.GetCustomerId(userId);
 
             if (!ModelState.IsValid)
             {
@@ -68,7 +68,7 @@
         public IActionResult Edit(string id)
         {
             var userId = this.User.GetId();
-            var customerUserId = this.customerService.GetCustomerUserId(userId);
+            var customerId = this.customerService.GetCustomerId(userId);
 
             if (!this.customerService.UserIsCustomer(userId))
             {
@@ -77,7 +77,7 @@
 
             var appoitment = this.appoitmentService.Details(id);
 
-            if(appoitment.CustomerId == customerUserId)
+            if(appoitment.CustomerId != customerId)
             {
                 return BadRequest();
             }
@@ -85,7 +85,7 @@
             return View(new AppoitmentViewModel
             {
                 Id = id,
-                CustomerId = customerUserId,
+                CustomerId = customerId,
                 Date = appoitment.Date,
                 Services = appoitment.Services.Select(s => new ServiceListViewModel
                 {
@@ -103,7 +103,7 @@
         {
             var userId = this.User.GetId();
 
-            var customerUserId = this.customerService.GetCustomerUserId(userId);
+            var customerUserId = this.customerService.GetCustomerId(userId);
 
             if (!this.customerService.UserIsCustomer(userId))
             {
@@ -115,12 +115,12 @@
                 return View(appoitmentData);
             }
 
-            var appoitmentId = this.appoitmentService.GetAppoitmentId(customerUserId);
+            var appoitmentId = this.appoitmentService.GetAppoitmentId(customerUserId).ToString();
 
-            //var editAppoitment = this.appoitmentService.EditAppoitment(
-            //    appoitmentId,
-            //    customerUserId);
-            //    //appoitment.IsBooked);
+            var editAppoitment = this.appoitmentService.EditAppoitment(
+                appoitmentId,
+                customerUserId,
+                appoitmentData.Date);
 
             return RedirectToAction(nameof(UserAppoitments));
         }

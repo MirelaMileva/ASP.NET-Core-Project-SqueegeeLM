@@ -1,0 +1,42 @@
+﻿@model AddAddressViewModel
+
+@{
+    ViewData["Title"] = "Add Address";
+}
+
+<div class="row">
+    <h2 class="heading-margin text-center">Add Address</h2>
+
+    <form method="post">
+        <div class="form-gruop">
+        <label asp-for="Country">Country</label>
+        <input asp-for="Country" class="form-control" placeholder="United Kingdom" />
+        <span asp-validation-for="Country" class="small text-danger"></span>
+    </div>
+    <div class="form-gruop">
+        <label asp-for="CityName">City Name</label>
+        <input asp-for="CityName" class="form-control" placeholder="London, Birmingam, Manchester.." />
+        <span asp-validation-for="CityName" class="small text-danger"></span>
+    </div>
+    <div class="form-gruop">
+        <label asp-for="PostCode">PostCode</label>
+        <input asp-for="PostCode" class="form-control" />
+        <span asp-validation-for="PostCode" class="small text-danger"></span>
+    </div>
+    <div class="form-gruop">
+        <label asp-for="Street">Street</label>
+        <input asp-for="Street" class="form-control" />
+        <span asp-validation-for="Street" class="small text-danger"></span>
+    </div>
+    <div class="form-gruop">
+        <label asp-for="BuildingNumber">Building Number</label>
+        <input asp-for="BuildingNumber" class="form-control" />
+        <span asp-validation-for="BuildingNumber" class="small text-danger"></span>
+    </div>
+    <input class="btn btn-primary" type="submit" value="Submit" />
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

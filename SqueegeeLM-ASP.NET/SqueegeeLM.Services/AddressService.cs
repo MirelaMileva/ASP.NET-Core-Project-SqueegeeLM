@@ -24,7 +24,7 @@
             this.data.SaveChanges();
         }
 
-        public Address CreateAddress(string country, string street, string buildingNumber, string cityName, string postCode)
+        public Address CreateAddress(string country, string cityName, string postCode, string street, string buildingNumber, int customerId)
         {
             var city = this.GetCities(cityName, postCode); 
 
@@ -33,7 +33,8 @@
                 Country = country,
                 City = city,
                 Street = street,
-                BuildingNumber = buildingNumber
+                BuildingNumber = buildingNumber,
+                CustomerId = customerId
             };
 
             this.data.Addresses.Add(address);
@@ -46,7 +47,20 @@
         {
             var city = this.data.Cities.FirstOrDefault(c => c.Name == cityName && c.PostCode == postCode);
 
+            if(city == null)
+            {
+                city = new City
+                {
+                    Name = cityName,
+                    PostCode = postCode
+                };
+
+                this.data.Cities.Add(city);
+                this.data.SaveChanges();
+            }
+
             return city;
         }
+
     }
 }

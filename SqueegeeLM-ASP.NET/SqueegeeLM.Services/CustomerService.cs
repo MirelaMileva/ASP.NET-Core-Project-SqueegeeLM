@@ -34,7 +34,7 @@
                 .Customers
                 .Any(c => c.UserId == userId);
 
-        public int GetCustomerUserId(string userId)
+        public int GetCustomerId(string userId)
             => this.data
             .Customers
             .Where(c => c.UserId == userId)

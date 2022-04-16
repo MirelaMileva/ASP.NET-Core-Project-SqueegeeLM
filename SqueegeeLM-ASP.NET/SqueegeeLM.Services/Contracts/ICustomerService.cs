@@ -8,7 +8,7 @@
 
         bool UserIsCustomer(string userId);
 
-        int GetCustomerUserId(string userId);
+        int GetCustomerId(string userId);
 
         Customer GetCustomerId(int customerId);
     }

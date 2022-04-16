@@ -4,7 +4,7 @@
 
     public interface IAddressService
     {
-        Address CreateAddress(string country, string street, string buildingNumber, string cityName, string postCode);
+        Address CreateAddress(string country, string street, string buildingNumber, string cityName, string postCode, int customerId);
 
         void AddAddressToCustomer(int customerId, Address address);
     }

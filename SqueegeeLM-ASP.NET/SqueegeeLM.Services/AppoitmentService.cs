@@ -72,6 +72,8 @@
 
         public IEnumerable<AppoitmentServiceModel> AppoitmentsByUser(string userId)
         {
+            var customerId = this.customerService.GetCustomerId(userId);
+
             return this.data
                 .Appoitments
                 .Where(a => a.Customer.UserId == userId)
@@ -79,7 +81,9 @@
                 {
                     CustomerId = a.CustomerId,
                     Date = a.Date,
-                    Services = a.Services.Select(s => new ServiceListServiceModel
+                    Services = a.Services
+                    .Where(s => s.CustomerId == customerId)
+                    .Select(s => new ServiceListServiceModel
                     {
                         CleaningType = s.CleaningType,
                         CleaningCategory = s.CleaningCategory.Name,
@@ -90,22 +94,51 @@
                 .ToList();
         }
 
-        public bool EditAppoitment(string appoitmentId, int customerId)
+        public bool EditAppoitment(string appoitmentId, int customerId, DateTime date)
         {
-            var appoitmentData = this.data.Appoitments.Find(appoitmentId);
+            var appoitment = this.data.Appoitments.Find(appoitmentId);
 
-            if (appoitmentData == null)
+            if (appoitment == null)
             {
                 return false;
             }
 
-            if(appoitmentData.CustomerId != customerId)
+            if(appoitment.CustomerId != customerId)
             {
                 return false;
             }
 
-            //appoitmentData.Date = appoitment.Date;
-            //appoitmentData.Services = appoitment.Services.Select();
+            appoitment.Date = date;
+
+            this.data.SaveChanges();
+
+            return true;
+        }
+
+        public bool EditAppoitmentServices(string appoitmentId, int customerId, ServiceListServiceModel services)
+        {
+            var appoitment = this.data.Appoitments.Find(appoitmentId);
+            var service = this.data.Services.Find(customerId);
+
+            if (appoitment == null)
+            {
+                return false;
+            }
+
+            if (service == null)
+            {
+                return false;
+            }
+
+            if (appoitment.CustomerId != customerId && service.CustomerId != customerId)
+            {
+                return false;
+            }
+
+            service.CleaningCategory.Name = services.CleaningCategory;
+            service.PropertyCategory.Name = services.PropertyCategory;
+            service.Frequency.Name = services.Frequency;
+            service.CleaningType = services.CleaningType;
 
             this.data.SaveChanges();
 

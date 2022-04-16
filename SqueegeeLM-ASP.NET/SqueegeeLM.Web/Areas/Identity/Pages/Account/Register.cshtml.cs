@@ -11,7 +11,7 @@
     using System.Text;
     using System.Text.Encodings.Web;
 
-    using static Models.DataConstants;
+    using static Models.WebConstants;
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<User> _signInManager;

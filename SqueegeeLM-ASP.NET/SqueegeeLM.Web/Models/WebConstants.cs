@@ -1,12 +1,11 @@
 ﻿namespace SqueegeeLM.Web.Models
 {
-    public class DataConstants
+    public class WebConstants
     {
         public const int UserFullNameMinLength = 5;
         public const int UserFullNameMaxLength = 30;
         public const int PasswordMinLength = 6;
         public const int PasswordMaxLength = 100;
-
 
         public const int CustomerFirstNameMaxLength = 50;
         public const int CustomerFirstNameMinLength = 2;

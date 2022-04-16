@@ -16,10 +16,25 @@
             this.customerService = customerService;
         }
 
-        [HttpPost]
-        public IActionResult Add(AddAddressViewModel model)
+        public ActionResult AddAddress()
         {
             var userId = this.User.GetId();
+            var customerId = this.customerService.GetCustomerId(userId);
+
+            if (!this.customerService.UserIsCustomer(userId))
+            {
+                return RedirectToAction(nameof(CustomerController.Create), "Customer");
+            }
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddAddress(AddAddressViewModel model)
+        {
+            var userId = this.User.GetId();
+
+            var customer = this.customerService.GetCustomerId(userId);
 
             if (!ModelState.IsValid)
             {
@@ -32,14 +47,13 @@
                     model.CityName,
                     model.PostCode,
                     model.BuildingNumber,
-                    model.Street
+                    model.Street,
+                    customer
                 );
-
-            var customer = this.customerService.GetCustomerUserId(userId);
 
             this.addressService.AddAddressToCustomer(customer, address);
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("UserAppoitment", "Appoitment");
         }
     }
 }

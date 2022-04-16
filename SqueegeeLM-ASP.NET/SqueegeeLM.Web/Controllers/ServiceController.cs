@@ -43,7 +43,7 @@
         {
             var userId = this.User.GetId();
 
-            var customerId = this.customerService.GetCustomerUserId(userId);
+            var customerId = this.customerService.GetCustomerId(userId);
 
             if (GetCustomerId(userId) == 0)
             {
@@ -85,11 +85,11 @@
 
             this.service.AddServiceToAppoitment(customerId, createService);
 
-            return RedirectToAction("UserAppoitments", "Appoitment");
+            return RedirectToAction("AddAddress", "Address");
         }
 
         private int GetCustomerId(string userId)
-            => this.customerService.GetCustomerUserId(userId);
+            => this.customerService.GetCustomerId(userId);
 
         private bool UserIsCustomer(string userId)
             => this.customerService.UserIsCustomer(userId);

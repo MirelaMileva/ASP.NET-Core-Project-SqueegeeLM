@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ServiceListViewModel>
+﻿@model IEnumerable<ServiceListServiceModel>
 
 <div class="row">
     <div class="col-6">
@@ -9,8 +9,8 @@
                 Services
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">@service.CleaningCategories</li>
-                <li class="list-group-item">@service.PropertyCategories</li>
+                <li class="list-group-item">@service.CleaningCategory</li>
+                <li class="list-group-item">@service.PropertyCategory</li>
                 <li class="list-group-item">@service.Frequency</li>
                 <li class="list-group-item">@service.CleaningType</li>
             </ul>
