@@ -14,12 +14,14 @@
 
         void AddServiceToCustomerAppoitment(int customerId, Service service);
 
-        IEnumerable<ServiceListServiceModel> GetAllServices();
+        IEnumerable<ServiceListServiceModel> GetAllServices(string userId);
 
         public Appoitment GetAppoitmentId(int customerId);
 
         IEnumerable<AppoitmentServiceModel> AppoitmentsByUser(string userId);
 
         AppoitmentServiceModel Details(string id, string userId);
+
+        void DeleteAppoitment(string userId);
     }
 }

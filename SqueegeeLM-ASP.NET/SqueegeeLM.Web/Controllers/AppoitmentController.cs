@@ -67,7 +67,9 @@
         [Authorize]
         public IActionResult UserServices()
         {
-            var appServices = this.appoitmentService.GetAllServices();
+            var userId = User.GetId();
+
+            var appServices = this.appoitmentService.GetAllServices(userId);
 
             return View(appServices);
         }
@@ -127,6 +129,31 @@
                 appoitmentData.Date);
 
             return RedirectToAction(nameof(UserAppoitments));
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Delete()
+        {
+            var userId = this.User.GetId();
+
+            var customerId = this.customerService.GetCustomerId(userId);
+
+            var appoitmentData = this.appoitmentService.GetAppoitmentId(customerId);
+
+            if (!this.customerService.UserIsCustomer(userId))
+            {
+                return RedirectToAction(nameof(CustomerController.Create), "Customer");
+            }
+
+            if (appoitmentData.CustomerId != customerId)
+            {
+                return BadRequest();
+            }
+
+            this.appoitmentService.DeleteAppoitment(userId);
+
+            return RedirectToAction("UserAppoitments", "Appoitment");
         }
     }
 }

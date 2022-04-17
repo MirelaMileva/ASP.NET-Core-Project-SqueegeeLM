@@ -57,10 +57,13 @@
             return appoitment;
         }
 
-        public IEnumerable<ServiceListServiceModel> GetAllServices()
+        public IEnumerable<ServiceListServiceModel> GetAllServices(string userId)
         {
+            var customerId = this.customerService.GetCustomerId(userId);
+
             return this.data
                 .Services
+                .Where(s => s.CustomerId == customerId)
                 .Select(s => new ServiceListServiceModel
                 {
                     CleaningType = s.CleaningType,
@@ -91,9 +94,6 @@
         public bool EditAppoitment(string appoitmentId, int customerId, DateTime date)
         {
             var appoitmentData = GetAppoitmentId(customerId);
-            //var appoitment = this.data
-            //    .Appoitments
-            //    .Where(appoitmentData.Id.ToString() == appoitmentId);
 
             if (appoitmentData == null)
             {
@@ -110,6 +110,20 @@
             this.data.SaveChanges();
 
             return true;
+        }
+
+        public void DeleteAppoitment(string userId)
+        {
+            var customerId = this.customerService.GetCustomerId(userId);
+            var appoitment = GetAppoitmentId(customerId);
+
+            if(appoitment == null)
+            {
+                return;
+            }
+
+            this.data.Appoitments.Remove(appoitment);
+            this.data.SaveChanges();
         }
 
         public bool EditAppoitmentServices(string appoitmentId, int customerId, ServiceListServiceModel services)

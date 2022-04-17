@@ -9,5 +9,7 @@
         public string Frequency { get; set; }
 
         public string CleaningType { get; set; }
+
+        public int CustomerId { get; set; }
     }
 }
