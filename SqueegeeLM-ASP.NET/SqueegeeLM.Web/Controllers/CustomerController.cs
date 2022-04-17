@@ -22,12 +22,12 @@
         {
             var userId = this.User.GetId();
 
-            //var userExist = this.service.UserIsCustomer(userId);
+            var userExist = this.customerService.UserIsCustomer(userId);
 
-            //if (userExist)
-            //{
-            //    return BadRequest();
-            //}
+            if (userExist)
+            {
+                return BadRequest();
+            }
 
             if (!ModelState.IsValid)
             {

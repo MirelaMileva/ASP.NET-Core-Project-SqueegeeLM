@@ -16,8 +16,11 @@
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Appoitment" asp-action="UserAppoitments">My Appoitments</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Appoitment" asp-action="UserServices">My Services</a>
+            </li>
         }
-        else if(!userIsAdmin)
+        else if (!userIsAdmin)
         {
             <li class="nav-item">
                 <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Create">Become Customer</a>

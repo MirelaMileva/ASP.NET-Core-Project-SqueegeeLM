@@ -65,17 +65,28 @@
         }
 
         [Authorize]
-        public IActionResult Edit(string id)
+        public IActionResult UserServices()
+        {
+            var appServices = this.appoitmentService.GetAllServices();
+
+            return View(appServices);
+        }
+
+        [Authorize]
+        public IActionResult Edit(string appId)
         {
             var userId = this.User.GetId();
             var customerId = this.customerService.GetCustomerId(userId);
+            var customer = this.customerService.GetCustomer(customerId);
+
+            var appoitmentData = this.appoitmentService.GetAppoitmentId(customerId);
 
             if (!this.customerService.UserIsCustomer(userId))
             {
                 return RedirectToAction(nameof(CustomerController.Create), "Customer");
             }
 
-            var appoitment = this.appoitmentService.Details(id);
+            var appoitment = this.appoitmentService.Details(appoitmentData.Id.ToString(), userId);
 
             if (appoitment.CustomerId != customerId)
             {
@@ -84,16 +95,9 @@
 
             return View(new AppoitmentViewModel
             {
-                Id = id,
+                Id = appId,
                 CustomerId = customerId,
-                Date = appoitment.Date,
-                Services = appoitment.Services.Select(s => new ServiceListViewModel
-                {
-                    CleaningCategories = s.CleaningCategory,
-                    PropertyCategories = s.PropertyCategory,
-                    Frequency = s.Frequency,
-                    CleaningType = s.CleaningType
-                })
+                Date = appoitment.Date
             });
         }
 

@@ -5,6 +5,7 @@
     using SqueegeeLM.Services.Models.Appoitment;
     using SqueegeeLM.Services.Models.Appoitments;
     using SqueegeeLM.Web.Data;
+    using System.Linq;
 
     public class AppoitmentService : IAppoitmentService
     {
@@ -73,6 +74,7 @@
         public IEnumerable<AppoitmentServiceModel> AppoitmentsByUser(string userId)
         {
             var customerId = this.customerService.GetCustomerId(userId);
+            var customer = this.customerService.GetCustomer(customerId);
 
             return this.data
                 .Appoitments
@@ -80,25 +82,30 @@
                 .Select(a => new AppoitmentServiceModel
                 {
                     CustomerId = a.CustomerId,
+                    Customer = customer,
                     Date = a.Date
-                });
+                })
+                .ToList();
         }
 
         public bool EditAppoitment(string appoitmentId, int customerId, DateTime date)
         {
-            var appoitment = this.data.Appoitments.Find(appoitmentId);
+            var appoitmentData = GetAppoitmentId(customerId);
+            //var appoitment = this.data
+            //    .Appoitments
+            //    .Where(appoitmentData.Id.ToString() == appoitmentId);
 
-            if (appoitment == null)
+            if (appoitmentData == null)
             {
                 return false;
             }
 
-            if(appoitment.CustomerId != customerId)
+            if(appoitmentData.CustomerId != customerId)
             {
                 return false;
             }
 
-            appoitment.Date = date;
+            appoitmentData.Date = date;
 
             this.data.SaveChanges();
 
@@ -135,22 +142,19 @@
             return true;
         }
 
-        public AppoitmentServiceModel Details(string id)
+        public AppoitmentServiceModel Details(string appId, string userId)
         {
+            var customerId = this.customerService.GetCustomerId(userId);
+            var customer = this.customerService.GetCustomer(customerId);
+
             return this.data
                 .Appoitments
-                .Where(a => a.Id.ToString() == id)
+                .Where(a => a.Id.ToString() == appId)
                 .Select(a => new AppoitmentServiceModel
                 {
                     Date = a.Date,
                     CustomerId = a.CustomerId,
-                    Services = a.Services.Select(s => new ServiceListServiceModel
-                    {
-                        CleaningType = s.CleaningType,
-                        CleaningCategory = s.CleaningCategory.Name,
-                        PropertyCategory = s.PropertyCategory.Name,
-                        Frequency = s.Frequency.Name
-                    })
+                    Customer = customer
                 })
                 .FirstOrDefault();
         }

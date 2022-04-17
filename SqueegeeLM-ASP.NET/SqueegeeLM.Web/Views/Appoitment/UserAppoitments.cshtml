@@ -11,22 +11,21 @@
 
 <div class="row">
     <div class="col-6">
-        @foreach(var appoitment in Model)
+        @foreach (var appoitment in Model)
         {
             <div class="card" style="width: 18rem;">
-            <div class="card-header">
-                Appoitments
+                <div class="card-header">
+                    Appoitments
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@appoitment.Date</li>
+                    @if (appoitment.Customer.UserId == User.GetId())
+                    {
+                        <a asp-controller="Appoitment" asp-action="Edit" asp-route-id="@appoitment.Id" class="btn btn-warning">Edit</a>
+                        <a asp-controller="Appoitment" asp-action="Delete" asp-route-id="@appoitment.Id" class="btn btn-danger">Delete</a>
+                    }
+                </ul>
             </div>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">@appoitment.Date</li>
-                <partial name="_AllServices" />
-                @if(appoitment.Customer.UserId == User.GetId())
-                {
-                    <a asp-controller="Appoitment" asp-action="Edit" asp-route-id="@appoitment.Id" class="btn btn-warning">Edit</a>
-                    <a asp-controller="Appoitment" asp-action="Delete" asp-route-id="@appoitment.Id" class="btn btn-danger">Delete</a>
-                }
-            </ul>
-        </div>
         }
     </div>
 </div>
