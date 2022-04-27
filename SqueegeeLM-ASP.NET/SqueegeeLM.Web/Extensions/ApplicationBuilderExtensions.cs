@@ -113,7 +113,7 @@
                     await roleManager.CreateAsync(role);
 
                     const string adminEmail = "admin@squeegeelm.com";
-                    const string adminPassword = "admin123";
+                    const string adminPassword = "Admin123";
 
                     var user = new User
                     {
