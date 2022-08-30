@@ -1,0 +1,61 @@
+﻿@model AllAppoitmentsQueryModel
+
+@{
+    ViewData["Title"] = "All Appoitments";
+}
+
+@{
+    var previousPage = Model.CurrentPage - 1;
+    if (previousPage < 1)
+    {
+        previousPage = 1;
+    }
+
+    var maxPage = Math.Ceiling((double)Model.TotalAppoitments / AllAppoitmentsQueryModel.AppoitmentsPerPage);
+}
+
+<div class="row mb-5">
+    <div class="col-md-6">
+        <a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+           asp-controller="Appoitment"
+           asp-action="AllAppoitments"
+           asp-route-currentPage="@previousPage"><<</a>
+    </div>
+
+    <div class="col-md-6">
+        <a class="btn btn-primary float-sm-right" style="margin-top: 10px"
+           asp-controller="Appoitment"
+           asp-action="AllAppoitments"
+           asp-route-currentPage="@(Model.CurrentPage + 1)">>></a>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        @foreach (var appoitment in Model.Appoitments)
+        {
+            <div class="card" style="width: 18rem;">
+                <div class="card-header">
+                    Appoitments
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">@appoitment.Date</li>
+                    @foreach (var service in appoitment.Services)
+                    {
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">@service.CleaningCategories</li>
+                            <li class="list-group-item">@service.PropertyCategories</li>
+                            <li class="list-group-item">@service.Frequency</li>
+                            <li class="list-group-item">@service.CleaningType</li>
+                        </ul>
+                    }
+                    @if (appoitment.Customer.UserId == User.GetId() || User.IsAdmin())
+                    {
+                        <a asp-controller="Appoitment" asp-action="Edit" asp-route-id="@appoitment.Id" class="btn btn-warning">Edit</a>
+                        <a asp-controller="Appoitment" asp-action="Delete" asp-route-id="@appoitment.Id" class="btn btn-danger">Delete</a>
+                    }
+                </ul>
+            </div>
+        }
+    </div>
+</div>

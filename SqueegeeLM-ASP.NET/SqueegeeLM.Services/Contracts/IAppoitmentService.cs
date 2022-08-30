@@ -23,5 +23,9 @@
         AppoitmentServiceModel Details(string id, string userId);
 
         void DeleteAppoitment(string userId);
+
+        AppoitmentQueryServiceModel AllAppoitments(string userId, int currentPage, int appoitmentsPerPage);
+
+        IEnumerable<AppoitmentServiceModel> GetAppoitments(IQueryable<Appoitment> appoitmentQuery);
     }
 }

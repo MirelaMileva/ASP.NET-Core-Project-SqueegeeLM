@@ -74,6 +74,23 @@
             return View(appServices);
         }
 
+        public IActionResult AllAppoitments([FromQuery] AllAppoitmentsQueryModel appoitmentsQuery)
+        {
+            var userId = User.GetId();
+
+            var appoitments = this.appoitmentService
+                .AllAppoitments(
+                userId,
+                appoitmentsQuery.CurrentPage,
+                AllAppoitmentsQueryModel.AppoitmentsPerPage
+                );
+
+            appoitmentsQuery.TotalAppoitments = appoitments.TotalAppoitments;
+            //appoitmentsQuery.Appoitments = appoitments.Appoitments.Select(a => new );
+
+            return View(appoitmentsQuery);
+        }
+
         [Authorize]
         public IActionResult Edit(string appId)
         {

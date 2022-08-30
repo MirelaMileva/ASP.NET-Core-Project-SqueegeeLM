@@ -1,5 +1,7 @@
 ﻿namespace SqueegeeLM.Services
 {
+    using AutoMapper;
+    using AutoMapper.QueryableExtensions;
     using SqueegeeLM.Data.Models;
     using SqueegeeLM.Services.Contracts;
     using SqueegeeLM.Services.Models.Appoitment;
@@ -11,11 +13,16 @@
     {
         private readonly SqueegeeLMDbContext data;
         private readonly ICustomerService customerService;
+        private readonly IMapper mapper;
 
-        public AppoitmentService(SqueegeeLMDbContext data, ICustomerService customerService)
+        public AppoitmentService(
+            SqueegeeLMDbContext data,
+            ICustomerService customerService,
+            IMapper mapper)
         {
             this.data = data;
             this.customerService = customerService;
+            this.mapper = mapper;
         }
 
         public string AddAppoitment(int customerId, DateTime date)
@@ -35,7 +42,7 @@
         }
 
         public void AddServiceToCustomerAppoitment(int customerId, Service service)
-        {    
+        {
             var customer = this.customerService.GetCustomer(customerId);
 
             var appoitment = this.data
@@ -64,13 +71,39 @@
             return this.data
                 .Services
                 .Where(s => s.CustomerId == customerId)
-                .Select(s => new ServiceListServiceModel
-                {
-                    CleaningType = s.CleaningType,
-                    CleaningCategory = s.CleaningCategory.Name,
-                    PropertyCategory = s.PropertyCategory.Name,
-                    Frequency = s.Frequency.Name
-                })
+                .ProjectTo<ServiceListServiceModel>(this.mapper.ConfigurationProvider)
+                .ToList();
+        }
+
+        public AppoitmentQueryServiceModel AllAppoitments(
+            string userId,
+            int currentPage = 1,
+            int appoitmentsPerPage = int.MaxValue)
+        {
+            var customerId = this.customerService.GetCustomerId(userId);
+            var customer = this.customerService.GetCustomer(customerId);
+
+            var appoitmentsQuery = this.data.Appoitments.Where(a => a.Customer.UserId == userId);
+
+            var totalAppoitments = appoitmentsQuery.Count();
+
+            var appoitments = GetAppoitments(appoitmentsQuery
+                .Skip((currentPage - 1) * appoitmentsPerPage)
+                .Take(appoitmentsPerPage));
+
+            return new AppoitmentQueryServiceModel
+            {
+                TotalAppoitments = totalAppoitments,
+                CurrentPage = currentPage,
+                AppoitmentsPerPages = appoitmentsPerPage,
+                Appoitments = appoitments
+            };
+        }
+
+        public IEnumerable<AppoitmentServiceModel> GetAppoitments(IQueryable<Appoitment> appoitmentQuery)
+        {
+            return appoitmentQuery
+                .ProjectTo<AppoitmentServiceModel>(this.mapper.ConfigurationProvider)
                 .ToList();
         }
 
@@ -86,9 +119,16 @@
                 {
                     CustomerId = a.CustomerId,
                     Customer = customer,
-                    Date = a.Date
-                })
-                .ToList();
+                    Date = a.Date,
+                    Services = a.Services.Select(s => new ServiceListServiceModel
+                    {
+                        CleaningCategory = s.CleaningCategory.Name,
+                        PropertyCategory = s.PropertyCategory.Name,
+                        Frequency = s.Frequency.Name,
+                        CleaningType = s.CleaningType,
+                        CustomerId = customerId
+                    }).ToList()
+                }).ToList();
         }
 
         public bool EditAppoitment(string appoitmentId, int customerId, DateTime date)
@@ -100,7 +140,7 @@
                 return false;
             }
 
-            if(appoitmentData.CustomerId != customerId)
+            if (appoitmentData.CustomerId != customerId)
             {
                 return false;
             }
@@ -117,7 +157,7 @@
             var customerId = this.customerService.GetCustomerId(userId);
             var appoitment = GetAppoitmentId(customerId);
 
-            if(appoitment == null)
+            if (appoitment == null)
             {
                 return;
             }
@@ -164,12 +204,13 @@
             return this.data
                 .Appoitments
                 .Where(a => a.Id.ToString() == appId)
-                .Select(a => new AppoitmentServiceModel
-                {
-                    Date = a.Date,
-                    CustomerId = a.CustomerId,
-                    Customer = customer
-                })
+                .ProjectTo<AppoitmentServiceModel>(this.mapper.ConfigurationProvider)
+                //.Select(a => new AppoitmentServiceModel
+                //{
+                //    Date = a.Date,
+                //    CustomerId = a.CustomerId,
+                //    Customer = customer
+                //})
                 .FirstOrDefault();
         }
     }

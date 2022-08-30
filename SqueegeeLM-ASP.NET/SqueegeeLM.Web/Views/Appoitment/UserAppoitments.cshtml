@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AppoitmentServiceModel>
+﻿@model IEnumerable<AppoitmentViewModel>
 
 @{
     ViewData["Title"] = "My Appoitments";
@@ -10,7 +10,7 @@
 }
 
 <div class="row">
-    <div class="col-6">
+    <div class="col-md-4">
         @foreach (var appoitment in Model)
         {
             <div class="card" style="width: 18rem;">
@@ -19,7 +19,16 @@
                 </div>
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">@appoitment.Date</li>
-                    @if (appoitment.Customer.UserId == User.GetId())
+                    @foreach (var service in appoitment.Services)
+                    {
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">@service.CleaningCategories</li>
+                            <li class="list-group-item">@service.PropertyCategories</li>
+                            <li class="list-group-item">@service.Frequency</li>
+                            <li class="list-group-item">@service.CleaningType</li>
+                        </ul>
+                    }
+                    @if (appoitment.Customer.UserId == User.GetId() || User.IsAdmin())
                     {
                         <a asp-controller="Appoitment" asp-action="Edit" asp-route-id="@appoitment.Id" class="btn btn-warning">Edit</a>
                         <a asp-controller="Appoitment" asp-action="Delete" asp-route-id="@appoitment.Id" class="btn btn-danger">Delete</a>

@@ -1,5 +1,6 @@
 ﻿namespace SqueegeeLM.Web.Controllers
 {
+    using AutoMapper;
     using Microsoft.AspNetCore.Mvc;
     using SqueegeeLM.Services.Contracts;
     using SqueegeeLM.Web.Extensions;
@@ -10,15 +11,18 @@
         private readonly IServiceService service;
         private readonly ICustomerService customerService;
         private readonly IAppoitmentService appoitmentService;
+        private readonly IMapper mapper;
 
         public ServiceController(
             IServiceService service, 
             ICustomerService customerService,
-            IAppoitmentService appoitmentService)
+            IAppoitmentService appoitmentService,
+            IMapper mapper)
         {
             this.service = service;
             this.customerService = customerService;
             this.appoitmentService = appoitmentService;
+            this.mapper = mapper;
         }
 
         public IActionResult AddService()
