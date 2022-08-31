@@ -11,6 +11,15 @@
         var userIsCustomer = Customers.UserIsCustomer(userId);
         var userIsAdmin = User.IsAdmin();
 
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="~/img/47284 - Copy.jpg" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">@User.Identity.Name</a>
+            </div>
+        </div>
+
         @if (userIsCustomer && !userIsAdmin)
         {
             <li class="nav-item">
