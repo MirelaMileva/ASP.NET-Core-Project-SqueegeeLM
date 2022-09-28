@@ -9,8 +9,6 @@
     {
         public IActionResult Index()
         {
-            ViewData[MessageConstant.ErrorMessage] = "Something went wrong!";
-
             return View();
         }
 

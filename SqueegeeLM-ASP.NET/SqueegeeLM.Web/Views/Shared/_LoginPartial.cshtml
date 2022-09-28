@@ -22,35 +22,67 @@
 
         @if (userIsCustomer && !userIsAdmin)
         {
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Appoitment" asp-action="UserAppoitments">My Appoitments</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link text-dark" asp-area="" asp-controller="Appoitment" asp-action="UserServices">My Services</a>
-            </li>
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Appoitment" asp-action="UserAppoitments"></a>
+                        <i class="fas fa-calendar-check"></i>
+                        <p>
+                            My Appoitments
+                        </p>
+                    </li>
+                </ul>
+            </nav>
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="" asp-controller="Appoitment" asp-action="UserServices"></a>
+                        <i class="fas fa-layer-group"></i>
+                        <p>
+                            My Services
+                        </p>
+                    </li>
+                </ul>
+            </nav>
         }
         else if (!userIsAdmin)
         {
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Create">
+                        <a class="nav-link" asp-area="" asp-controller="Customer" asp-action="Create">
                             <i class="fas fa-users"></i>
                             <p>
                                 Become Customer
                             </p>
                         </a>
+                    </li>
+                </ul>
             </nav>
         }
-        <nav class="mt-2">
-                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
-                            <i class="fas fa-user"></i>
-                            <p>
-                                Account
-                            </p>
-                        </a>
-            </nav>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">
+                <i class="fas fa-user"></i>
+                <p>
+                    Account
+                </p>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-dark">Log Out</button>
+                @*<i class="fas fa-door-open"></i>*@
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
     }
 </ul>

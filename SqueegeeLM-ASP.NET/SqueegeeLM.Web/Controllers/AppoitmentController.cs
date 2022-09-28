@@ -78,15 +78,15 @@
         {
             var userId = User.GetId();
 
-            var appoitments = this.appoitmentService
+            var queryResult = this.appoitmentService
                 .AllAppoitments(
                 userId,
                 appoitmentsQuery.CurrentPage,
                 AllAppoitmentsQueryModel.AppoitmentsPerPage
                 );
 
-            appoitmentsQuery.TotalAppoitments = appoitments.TotalAppoitments;
-            //appoitmentsQuery.Appoitments = appoitments.Appoitments.Select(a => new );
+            appoitmentsQuery.TotalAppoitments = queryResult.TotalAppoitments;
+            appoitmentsQuery.Appoitments = (IEnumerable<AppoitmentViewModel>)queryResult.Appoitments.Where(x => x.Customer.UserId == userId);
 
             return View(appoitmentsQuery);
         }
